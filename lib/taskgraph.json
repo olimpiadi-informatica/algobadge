@@ -4,6 +4,10 @@
             "title": "Problemi introduttivi",
             "id": "intro",
             "prerequisites": [],
+            "position": [
+                1,
+                2
+            ],
             "tasks": [
                 {
                     "name": "easy1"
@@ -17,8 +21,12 @@
         {
             "title": "C++ STL",
             "id": "stl",
-            "prerequisite": [
+            "prerequisites": [
                 "intro"
+            ],
+            "position": [
+                2,
+                1
             ],
             "tasks": [
                 {
@@ -26,6 +34,126 @@
                 },
                 {
                     "name": "cestini"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "Greedy, sorting e searching",
+            "id": "greedy",
+            "prerequisites": [
+                "stl"
+            ],
+            "position": [
+                3,
+                1
+            ],
+            "tasks": [
+                {
+                    "name": "abc_quadri"
+                },
+                {
+                    "name": "ois_truffa"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "Matematica",
+            "id": "math",
+            "prerequisites": [
+                "intro"
+            ],
+            "position": [
+                2,
+                2
+            ],
+            "tasks": [
+                {
+                    "name": "ois_scrigni"
+                },
+                {
+                    "name": "abc_rsa"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "Ricorsione e backtracking",
+            "id": "bnb",
+            "prerequisites": [
+                "intro"
+            ],
+            "position": [
+                2,
+                3
+            ],
+            "tasks": [
+                {
+                    "name": "ois_cabala"
+                },
+                {
+                    "name": "ois_solitario"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "Programmazione dinamica",
+            "id": "dp",
+            "prerequisites": [
+                "bnb"
+            ],
+            "position": [
+                3,
+                3
+            ],
+            "tasks": [
+                {
+                    "name": "preoii_treni"
+                },
+                {
+                    "name": "nonna"
+                }
+            ],
+            "resources_md": "# Documenti\n\n- [Dispensa di Sebastiano Vigna](https://ioi.di.unimi.it/dinamica.pdf)\n- [Manoscritto di Andrea Ciprietti](https://wiki.olinfo.it/2021/lezione_4_-_dp.pdf)\n\n# Videolezioni\n\n- [Lezione di Dario Ostuni (parte 1)](https://www.youtube.com/watch?v=dT5wMqCzp9I)\n- [Lezione di Dario Ostuni (parte 2)](https://www.youtube.com/watch?v=Ubb-SwvMAq4)\n- [Lezione di Dario Ostuni (parte 3)](https://www.youtube.com/watch?v=30joNrPY7MA)\n- [Lezione di Dario Ostuni (parte 4)](https://www.youtube.com/watch?v=BCxaH6B5wgg)\n- [Lezione di Andrea Ciprietti](https://www.youtube.com/watch?v=3tOMj7xZv1U)\n"
+        },
+        {
+            "title": "Grafi",
+            "id": "grafi",
+            "prerequisites": [
+                "greedy"
+            ],
+            "position": [
+                3,
+                2
+            ],
+            "tasks": [
+                {
+                    "name": "ois_islands"
+                },
+                {
+                    "name": "dijkstra"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "Strutture dati",
+            "id": "ds",
+            "prerequisites": [
+                "grafi"
+            ],
+            "position": [
+                4,
+                2
+            ],
+            "tasks": [
+                {
+                    "name": "segtree"
+                },
+                {
+                    "name": "paletta"
                 }
             ],
             "resources_md": "# cazzi\n\n<link>"
