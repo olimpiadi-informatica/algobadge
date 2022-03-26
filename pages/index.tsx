@@ -14,7 +14,6 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
 
   useEffect(() => {
     if (!user) return;
-    console.log("> user", user);
     getUserInfo(user.username).then((info) => setUserInfo(info));
   }, [user]);
 
@@ -26,7 +25,7 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
       <p>
         Ciao {user.firstName} {user.lastName}
       </p>
-      <Tree taskGraph={taskGraph} />
+      <Tree taskGraph={taskGraph} userInfo={userInfo} />
     </div>
   );
 }
