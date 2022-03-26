@@ -1,10 +1,12 @@
 import { Loading } from "components/loading/Loading";
 import { Login } from "components/login/Login";
+import Tree from "components/tree/Tree";
 import { useLoggedUser } from "lib/auth";
+import { getTaskGraph, TaskGraph } from "lib/taskgraph";
 import { getUserInfo, UserInfo } from "lib/training-api";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   const user = useLoggedUser();
   const [userInfo, setUserInfo] = useState<UserInfo | null | undefined>(
     undefined
@@ -24,11 +26,17 @@ export default function Home() {
       <p>
         Ciao {user.firstName} {user.lastName}
       </p>
-      {userInfo.scores.map((s) => (
-        <p key={s.name}>
-          {s.title} ({s.name}) -- {s.score}
-        </p>
-      ))}
+      <Tree taskGraph={taskGraph} />
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const taskGraph = getTaskGraph();
+
+  return {
+    props: {
+      taskGraph,
+    },
+  };
 }

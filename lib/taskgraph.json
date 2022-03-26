@@ -1,0 +1,34 @@
+{
+    "nodes": [
+        {
+            "title": "Problemi introduttivi",
+            "id": "intro",
+            "prerequisites": [],
+            "tasks": [
+                {
+                    "name": "easy1"
+                },
+                {
+                    "name": "biglietti"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        },
+        {
+            "title": "C++ STL",
+            "id": "stl",
+            "prerequisite": [
+                "intro"
+            ],
+            "tasks": [
+                {
+                    "name": "map"
+                },
+                {
+                    "name": "cestini"
+                }
+            ],
+            "resources_md": "# cazzi\n\n<link>"
+        }
+    ]
+}
