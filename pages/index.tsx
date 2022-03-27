@@ -1,3 +1,4 @@
+import { Category } from "components/category/Category";
 import { Loading } from "components/loading/Loading";
 import { Login } from "components/login/Login";
 import Tree from "components/tree/Tree";
@@ -11,6 +12,9 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   const user = useLoggedUser();
   const [userInfo, setUserInfo] = useState<UserInfo | null | undefined>(
     undefined
+  );
+  const [selectedNode, setSelectedNode] = useState<string>(
+    taskGraph.nodes.find((n) => n.prerequisites.length === 0)?.id ?? ""
   );
 
   useEffect(() => {
@@ -28,7 +32,8 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
       <p>
         Ciao {user.firstName} {user.lastName}
       </p>
-      <Tree badges={badges} />
+      <Tree badges={badges} setSelectedNode={setSelectedNode} />
+      {selectedNode in badges && <Category badge={badges[selectedNode]} />}
     </div>
   );
 }

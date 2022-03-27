@@ -1,4 +1,4 @@
-import { Badge, CategoryBadge, CategoryBadges } from "lib/badges";
+import { CategoryBadge, CategoryBadges } from "lib/badges";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Line } from "./Line";
 import styles from "./Tree.module.scss";
@@ -19,7 +19,13 @@ const textColors = {
   gold: "#665900",
 };
 
-function TreeNode({ node }: { node: CategoryBadge }) {
+function TreeNode({
+  node,
+  onClick,
+}: {
+  node: CategoryBadge;
+  onClick: () => void;
+}) {
   const style = {
     "--row": node.node.position[1],
     "--column": node.node.position[0],
@@ -29,17 +35,27 @@ function TreeNode({ node }: { node: CategoryBadge }) {
   const maxScore = node.node.tasks.length * 100;
   return (
     <div className={styles.node} style={style}>
-      <div data-node-id={node.node.id} className={styles.badge}>
+      <button
+        data-node-id={node.node.id}
+        className={styles.badge}
+        onClick={onClick}
+      >
         <div className={styles.badgeName}>{node.node.id}</div>
         <div className={styles.score}>
           {node.score} / {maxScore}
         </div>
-      </div>
+      </button>
     </div>
   );
 }
 
-export default function Tree({ badges }: { badges: CategoryBadges }) {
+export default function Tree({
+  badges,
+  setSelectedNode,
+}: {
+  badges: CategoryBadges;
+  setSelectedNode: (node: string) => void;
+}) {
   const treeRef = useRef<HTMLDivElement>(null);
   const [elements, setElements] = useState<{
     [id: string]: HTMLElement;
@@ -87,7 +103,11 @@ export default function Tree({ badges }: { badges: CategoryBadges }) {
   return (
     <div className={styles.tree} ref={treeRef}>
       {badgesList.map((badge) => (
-        <TreeNode node={badge} key={badge.node.id} />
+        <TreeNode
+          node={badge}
+          key={badge.node.id}
+          onClick={() => setSelectedNode(badge.node.id)}
+        />
       ))}
       {links.map((link) => (
         <Line key={link.id} start={link.start} end={link.end} />
