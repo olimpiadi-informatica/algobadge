@@ -17,8 +17,8 @@ const getOffset = (el: HTMLElement) => {
 };
 
 export function Line({ start, end }: Props) {
-  const thickness = 1;
-  const color = "blue";
+  const thickness = 2;
+  const color = "black";
 
   const off1 = getOffset(start);
   const off2 = getOffset(end);

@@ -6,7 +6,7 @@ export const BRONZE_SCORE = 10;
 export const SILVER_SCORE = 150;
 export const GOLD_SCORE = 200;
 
-export type Badge = "none" | "bronze" | "silver" | "gold";
+export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
 
 export type CategoryBadge = {
   node: Node;
@@ -41,6 +41,17 @@ export function computeCategoryBadges(
       score,
       badge: computeBadge(score),
     };
+  }
+  for (const node of taskGraph.nodes) {
+    let locked = false;
+    for (const dep of node.prerequisites) {
+      if (categoryBadges[dep].score < UNLOCK_SCORE) {
+        locked = true;
+      }
+    }
+    if (locked) {
+      categoryBadges[node.id].badge = "locked";
+    }
   }
   return categoryBadges;
 }

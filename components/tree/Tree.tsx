@@ -1,17 +1,39 @@
-import { CategoryBadge, CategoryBadges } from "lib/badges";
+import { Badge, CategoryBadge, CategoryBadges } from "lib/badges";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Line } from "./Line";
 import styles from "./Tree.module.scss";
+
+const badgeColors = {
+  locked: "#eee",
+  none: "#fff",
+  bronze: "#cd7f32",
+  silver: "#c0c0c0",
+  gold: "#ffdf00",
+};
+
+const textColors = {
+  locked: "#bbb",
+  none: "#000",
+  bronze: "#523214",
+  silver: "#4c4c4c",
+  gold: "#665900",
+};
 
 function TreeNode({ node }: { node: CategoryBadge }) {
   const style = {
     "--row": node.node.position[1],
     "--column": node.node.position[0],
+    "--color": badgeColors[node.badge],
+    "--text-color": textColors[node.badge],
   } as React.CSSProperties;
+  const maxScore = node.node.tasks.length * 100;
   return (
     <div className={styles.node} style={style}>
       <div data-node-id={node.node.id} className={styles.badge}>
-        {node.node.id}
+        <div className={styles.badgeName}>{node.node.id}</div>
+        <div className={styles.score}>
+          {node.score} / {maxScore}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 .tree {
-    $node-radius: 100px;
+    $node-radius: 80px;
 
     display: grid;
     gap: 1rem;
@@ -23,11 +23,24 @@
             width: $node-radius;
             height: $node-radius;
             border-radius: 50%;
-            background-color: red;
+            background-color: var(--color);
+            color: var(--text-color);
+            border: 1px solid;
 
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+
+            .badgeName {
+                font-size: 1.3rem;
+                line-height: 1.2;
+                font-family: monospace;
+            }
+
+            .score {
+                font-size: 0.8rem;
+            }
         }
     }
 }
