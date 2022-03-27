@@ -18,6 +18,9 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   );
 
   useEffect(() => {
+    if (user === null) {
+      setUserInfo(null);
+    }
     if (!user) return;
     getUserInfo(user.username).then((info) => setUserInfo(info));
   }, [user]);
@@ -30,7 +33,8 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   return (
     <div>
       <p>
-        Ciao {user.firstName} {user.lastName}
+        Ciao {user.firstName} {user.lastName}! (Login effettuato tramite{" "}
+        <a href="https://training.olinfo.it">training.olinfo.it</a>)
       </p>
       <Tree badges={badges} setSelectedNode={setSelectedNode} />
       {selectedNode in badges && <Category badge={badges[selectedNode]} />}

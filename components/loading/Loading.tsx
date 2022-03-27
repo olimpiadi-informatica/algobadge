@@ -1,3 +1,10 @@
+import styles from "./Loading.module.scss";
+
 export function Loading() {
-  return <p>Loading...</p>;
+  return (
+    <div className={styles.loading}>
+      <img src="/loading.gif" alt="Loading..." />
+      caricamento...
+    </div>
+  );
 }
