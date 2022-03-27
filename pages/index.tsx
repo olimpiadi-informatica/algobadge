@@ -37,7 +37,9 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
         <a href="https://training.olinfo.it">training.olinfo.it</a>)
       </p>
       <Tree badges={badges} setSelectedNode={setSelectedNode} />
-      {selectedNode in badges && <Category badge={badges[selectedNode]} />}
+      {selectedNode in badges && (
+        <Category badge={badges[selectedNode]} badges={badges} />
+      )}
     </div>
   );
 }

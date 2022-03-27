@@ -1,18 +1,19 @@
 import {
   BRONZE_SCORE,
   CategoryBadge,
+  CategoryBadges,
   GOLD_SCORE,
   SILVER_SCORE,
   TaskScores,
+  TASK_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
 import styles from "./Category.module.scss";
 import ReactMarkdown from "react-markdown";
 import { ProgressBar } from "react-bootstrap";
 
-function Progress({ score }: { score: number }) {
-  if (score === 200) {
-    // FIXME: make this depend on the number of tasks
+function Progress({ score, numTasks }: { score: number; numTasks: number }) {
+  if (score === numTasks * TASK_MAX_SCORE) {
     return (
       <ProgressBar>
         <ProgressBar className={styles.progressGold} animated now={100} />
@@ -20,7 +21,6 @@ function Progress({ score }: { score: number }) {
     );
   }
   const pieces = [];
-  const scaleFactor = 100 / 200; // FIXME: make this depend on the number of tasks
   const cutoffs = [
     {
       from: 0,
@@ -38,14 +38,15 @@ function Progress({ score }: { score: number }) {
       className: styles.progressSilver,
     },
   ];
+  const scorePerc = score / numTasks / TASK_MAX_SCORE;
   for (const cutoff of cutoffs) {
-    if (score >= cutoff.from) {
-      const width = Math.min(score - cutoff.from, cutoff.to - cutoff.from);
+    if (scorePerc >= cutoff.from) {
+      const width = Math.min(scorePerc - cutoff.from, cutoff.to - cutoff.from);
       pieces.push(
         <ProgressBar
           className={cutoff.className}
           animated
-          now={scaleFactor * width}
+          now={width * 100}
           key={cutoff.from}
         />
       );
@@ -66,7 +67,7 @@ function TaskList({ tasks }: { tasks: TaskScores }) {
         >
           {task}
         </a>{" "}
-        ({score} / 100)
+        ({score} / {TASK_MAX_SCORE})
       </li>
     );
   };
@@ -80,20 +81,32 @@ function TaskList({ tasks }: { tasks: TaskScores }) {
   );
 }
 
-export function Category({ badge }: { badge: CategoryBadge }) {
+export function Category({
+  badge,
+  badges,
+}: {
+  badge: CategoryBadge;
+  badges: CategoryBadges;
+}) {
+  const unlockScore = badge.node.prerequisites.map(
+    (p) => Object.keys(badges[p].tasks).length * TASK_MAX_SCORE
+  );
+  const numTasks = badge.node.tasks.length;
+
   return (
     <div className={styles.category}>
       <h2 className={styles.title}>{badge.node.title}</h2>
       {badge.badge !== "locked" ? (
         <>
-          <Progress score={badge.score} />
+          <Progress score={badge.score} numTasks={numTasks} />
           <div className={styles.taskList}>
             <TaskList tasks={badge.tasks} />
           </div>
         </>
       ) : (
         <p>
-          Questa categoria è bloccata! Totalizza almeno {UNLOCK_SCORE} punti in{" "}
+          Questa categoria è bloccata! Totalizza almeno{" "}
+          {unlockScore[0] * UNLOCK_SCORE} punti in{" "}
           <code>{badge.node.prerequisites}</code> per sbloccarla.
         </p>
       )}

@@ -1,10 +1,11 @@
 import { Node, TaskGraph } from "./taskgraph";
 import { UserInfo } from "./training-api";
 
-export const UNLOCK_SCORE = 50;
-export const BRONZE_SCORE = 100;
-export const SILVER_SCORE = 150;
-export const GOLD_SCORE = 200;
+export const TASK_MAX_SCORE = 100;
+export const UNLOCK_SCORE = 50 / 200;
+export const BRONZE_SCORE = 100 / 200;
+export const SILVER_SCORE = 150 / 200;
+export const GOLD_SCORE = 200 / 200;
 
 export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
 
@@ -19,10 +20,10 @@ export type CategoryBadge = {
 
 export type CategoryBadges = { [category: string]: CategoryBadge };
 
-function computeBadge(score: number): Badge {
-  if (score >= GOLD_SCORE) return "gold";
-  if (score >= SILVER_SCORE) return "silver";
-  if (score >= BRONZE_SCORE) return "bronze";
+function computeBadge(score: number, numTasks: number): Badge {
+  if (score >= TASK_MAX_SCORE * numTasks * GOLD_SCORE) return "gold";
+  if (score >= TASK_MAX_SCORE * numTasks * SILVER_SCORE) return "silver";
+  if (score >= TASK_MAX_SCORE * numTasks * BRONZE_SCORE) return "bronze";
   return "none";
 }
 
@@ -45,14 +46,16 @@ export function computeCategoryBadges(
     categoryBadges[node.id] = {
       node,
       score,
-      badge: computeBadge(score),
+      badge: computeBadge(score, node.tasks.length),
       tasks: categoryTasks,
     };
   }
   for (const node of taskGraph.nodes) {
     let locked = false;
     for (const dep of node.prerequisites) {
-      if (categoryBadges[dep].score < UNLOCK_SCORE) {
+      const numTasks = categoryBadges[dep].node.tasks.length;
+      const unlockScore = numTasks * TASK_MAX_SCORE * UNLOCK_SCORE;
+      if (categoryBadges[dep].score < unlockScore) {
         locked = true;
       }
     }
