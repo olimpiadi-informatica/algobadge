@@ -1,0 +1,12 @@
+.line {
+    padding: 0;
+    margin: 0;
+    height: var(--thickness);
+    background-color: var(--color);
+    line-height: 1px;
+    position: absolute;
+    left: var(--cx);
+    top: var(--cy);
+    width: var(--length);
+    transform: rotate(var(--angle));
+}

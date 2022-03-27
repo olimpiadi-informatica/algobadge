@@ -1,0 +1,33 @@
+.tree {
+    $node-radius: 100px;
+
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+
+    .node {
+        grid-column: var(--column) / span 1;
+        grid-row: var(--row) / span 1;
+
+        @media (orientation: portrait) {
+            grid-row: var(--column) / span 1;
+            grid-column: var(--row) / span 1;
+        }
+
+        height: $node-radius;
+
+        display: flex;
+        justify-content: center;
+
+        .badge {
+            width: $node-radius;
+            height: $node-radius;
+            border-radius: 50%;
+            background-color: red;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

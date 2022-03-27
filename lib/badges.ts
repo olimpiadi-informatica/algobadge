@@ -14,6 +14,8 @@ export type CategoryBadge = {
   badge: Badge;
 };
 
+export type CategoryBadges = { [category: string]: CategoryBadge };
+
 function computeBadge(score: number): Badge {
   if (score >= GOLD_SCORE) return "gold";
   if (score >= SILVER_SCORE) return "silver";
@@ -24,8 +26,8 @@ function computeBadge(score: number): Badge {
 export function computeCategoryBadges(
   taskGraph: TaskGraph,
   userInfo: UserInfo
-): { [category: string]: CategoryBadge } {
-  const categoryBadges: { [category: string]: CategoryBadge } = {};
+): CategoryBadges {
+  const categoryBadges: CategoryBadges = {};
   const taskScores = Object.fromEntries(
     userInfo.scores.map((task) => [task.name, task.score])
   );
