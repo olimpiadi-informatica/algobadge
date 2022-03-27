@@ -33,7 +33,11 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   return (
     <div>
       <p>
-        Ciao {user.firstName} {user.lastName}! (Login effettuato tramite{" "}
+        Ciao{" "}
+        <strong>
+          {user.firstName} {user.lastName}
+        </strong>
+        ! (Login effettuato tramite{" "}
         <a href="https://training.olinfo.it">training.olinfo.it</a>)
       </p>
       <Tree badges={badges} setSelectedNode={setSelectedNode} />
