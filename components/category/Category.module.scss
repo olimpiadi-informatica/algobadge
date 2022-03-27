@@ -5,4 +5,25 @@
         font-size: 2.2rem;
         text-decoration: underline;
     }
+
+    .taskList {
+        margin-top: 2rem;
+    }
+
+    .resources {
+        margin-top: 2rem;
+    }
+
+    .progressNone {
+        background-color: #dadada;
+    }
+    .progressBronze {
+        background-color: #cd7f32;
+    }
+    .progressSilver {
+        background-color: #c0c0c0;
+    }
+    .progressGold {
+        background-color: #ffdf00;
+    }
 }

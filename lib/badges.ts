@@ -2,16 +2,19 @@ import { Node, TaskGraph } from "./taskgraph";
 import { UserInfo } from "./training-api";
 
 export const UNLOCK_SCORE = 50;
-export const BRONZE_SCORE = 10;
+export const BRONZE_SCORE = 100;
 export const SILVER_SCORE = 150;
 export const GOLD_SCORE = 200;
 
 export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
 
+export type TaskScores = { [taskId: string]: number };
+
 export type CategoryBadge = {
   node: Node;
   score: number;
   badge: Badge;
+  tasks: TaskScores;
 };
 
 export type CategoryBadges = { [category: string]: CategoryBadge };
@@ -33,13 +36,17 @@ export function computeCategoryBadges(
   );
   for (const node of taskGraph.nodes) {
     let score = 0;
+    const categoryTasks: TaskScores = {};
     for (const task of node.tasks) {
-      score += taskScores[task.name] ?? 0;
+      const taskScore = taskScores[task.name] ?? 0;
+      categoryTasks[task.name] = taskScore;
+      score += taskScore;
     }
     categoryBadges[node.id] = {
       node,
       score,
       badge: computeBadge(score),
+      tasks: categoryTasks,
     };
   }
   for (const node of taskGraph.nodes) {
