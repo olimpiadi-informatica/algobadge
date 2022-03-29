@@ -63,6 +63,18 @@ export function Category({
           <div className={styles.taskList}>
             <TaskList tasks={badge.tasks} />
           </div>
+          <div className={styles.resources}>
+            <ReactMarkdown
+              components={{
+                h1: "h3",
+                h2: "h4",
+                h3: "h5",
+                h4: "h6",
+              }}
+            >
+              {badge.node.resources_md}
+            </ReactMarkdown>
+          </div>
         </>
       ) : (
         <p>
@@ -71,18 +83,6 @@ export function Category({
           <code>{badge.node.prerequisites}</code> per sbloccarla.
         </p>
       )}
-      <div className={styles.resources}>
-        <ReactMarkdown
-          components={{
-            h1: "h3",
-            h2: "h4",
-            h3: "h5",
-            h4: "h6",
-          }}
-        >
-          {badge.node.resources_md}
-        </ReactMarkdown>
-      </div>
     </div>
   );
 }
