@@ -6,7 +6,8 @@ import {
   TASK_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
-import { ProgressBar } from "react-bootstrap";
+import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
+import { OverlayInjectedProps } from "react-bootstrap/esm/Overlay";
 
 function MedalIcon({ color }: { color: string }) {
   return (
@@ -38,7 +39,7 @@ function LockIcon({ color }: { color: string }) {
   );
 }
 
-function ProgressCheckpoints() {
+function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
   const checkpoints = [
     { position: BRONZE_SCORE, color: "#cd7f32" },
     { position: SILVER_SCORE, color: "#c0c0c0" },
@@ -46,16 +47,18 @@ function ProgressCheckpoints() {
   ];
   return (
     <>
-      <div
-        className={styles.checkpoint}
-        style={
-          {
-            "--position": `${UNLOCK_SCORE * 100}%`,
-          } as React.CSSProperties
-        }
-      >
-        <LockIcon color="black" />
-      </div>
+      {withUnlock && (
+        <div
+          className={styles.checkpoint}
+          style={
+            {
+              "--position": `${UNLOCK_SCORE * 100}%`,
+            } as React.CSSProperties
+          }
+        >
+          <LockIcon color="black" />
+        </div>
+      )}
       {checkpoints.map((checkpoint) => (
         <div
           className={styles.checkpoint}
@@ -76,16 +79,18 @@ function ProgressCheckpoints() {
 export function Progress({
   score,
   numTasks,
+  nextCategories,
 }: {
   score: number;
   numTasks: number;
+  nextCategories: string[];
 }) {
   if (score === numTasks * TASK_MAX_SCORE) {
     return (
       <div className={styles.progress}>
         <ProgressBar>
           <ProgressBar className={styles.progressGold} animated now={100} />
-          <ProgressCheckpoints />
+          <ProgressCheckpoints withUnlock={nextCategories.length > 0} />
         </ProgressBar>
       </div>
     );
@@ -123,12 +128,44 @@ export function Progress({
     }
   }
 
+  function Overlay(props: OverlayInjectedProps) {
+    let message = "";
+    if (scorePerc < UNLOCK_SCORE && nextCategories.length > 0) {
+      message = `Ancora ${
+        numTasks * TASK_MAX_SCORE * UNLOCK_SCORE - score
+      } punti per sbloccare le prossime categorie`;
+    } else if (scorePerc < BRONZE_SCORE) {
+      message = `Ancora ${
+        numTasks * TASK_MAX_SCORE * BRONZE_SCORE - score
+      } punti per sbloccare il badge di bronzo!`;
+    } else if (scorePerc < SILVER_SCORE) {
+      message = `Ancora ${
+        numTasks * TASK_MAX_SCORE * SILVER_SCORE - score
+      } punti per sbloccare il badge di argento!`;
+    } else if (scorePerc < GOLD_SCORE) {
+      message = `Ancora ${
+        numTasks * TASK_MAX_SCORE * GOLD_SCORE - score
+      } punti per sbloccare il badge d'oro!`;
+    } else {
+      return null;
+    }
+    return (
+      <Tooltip id="progress-overlay" {...props}>
+        {message}
+      </Tooltip>
+    );
+  }
+
   return (
-    <div className={styles.progress}>
-      <ProgressBar>
-        {pieces}
-        <ProgressCheckpoints />
-      </ProgressBar>
-    </div>
+    <OverlayTrigger placement="top" overlay={Overlay}>
+      <div>
+        <div className={styles.progress}>
+          <ProgressBar>
+            {pieces}
+            <ProgressCheckpoints withUnlock={nextCategories.length > 0} />
+          </ProgressBar>
+        </div>
+      </div>
+    </OverlayTrigger>
   );
 }

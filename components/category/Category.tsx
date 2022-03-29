@@ -46,13 +46,20 @@ export function Category({
     (p) => Object.keys(badges[p].tasks).length * TASK_MAX_SCORE
   );
   const numTasks = badge.node.tasks.length;
+  const nextCategories = Object.values(badges)
+    .filter((b) => b.node.prerequisites.includes(badge.node.id))
+    .map((b) => b.node.id);
 
   return (
     <div className={styles.category}>
       <h2 className={styles.title}>{badge.node.title}</h2>
       {badge.badge !== "locked" ? (
         <>
-          <Progress score={badge.score} numTasks={numTasks} />
+          <Progress
+            score={badge.score}
+            numTasks={numTasks}
+            nextCategories={nextCategories}
+          />
           <div className={styles.taskList}>
             <TaskList tasks={badge.tasks} />
           </div>
