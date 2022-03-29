@@ -60,9 +60,9 @@ export function Progress({
   const pieces = [];
   const cutoffs = [
     {
-      from: 0,
-      to: BRONZE_SCORE,
-      className: styles.progressNone,
+      from: SILVER_SCORE,
+      to: GOLD_SCORE,
+      className: styles.progressSilver,
     },
     {
       from: BRONZE_SCORE,
@@ -70,23 +70,23 @@ export function Progress({
       className: styles.progressBronze,
     },
     {
-      from: SILVER_SCORE,
-      to: GOLD_SCORE,
-      className: styles.progressSilver,
+      from: 0,
+      to: BRONZE_SCORE,
+      className: styles.progressNone,
     },
   ];
   const scorePerc = score / numTasks / TASK_MAX_SCORE;
   for (const cutoff of cutoffs) {
     if (scorePerc >= cutoff.from) {
-      const width = Math.min(scorePerc - cutoff.from, cutoff.to - cutoff.from);
       pieces.push(
         <ProgressBar
           className={cutoff.className}
           animated
-          now={width * 100}
+          now={scorePerc * 100}
           key={cutoff.from}
         />
       );
+      break;
     }
   }
 
