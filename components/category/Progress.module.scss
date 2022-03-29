@@ -1,0 +1,26 @@
+.progressNone {
+    background-color: #dadada;
+}
+.progressBronze {
+    background-color: #cd7f32;
+}
+.progressSilver {
+    background-color: #c0c0c0;
+}
+.progressGold {
+    background-color: #ffdf00;
+}
+
+.progress {
+    $medal-size: 35px;
+    $medal-spacing: 5px;
+    position: relative;
+    overflow: visible;
+    padding-bottom: $medal-size + $medal-spacing;
+
+    .checkpoint {
+        position: absolute;
+        left: calc(var(--position) - $medal-size / 2);
+        top: calc(1rem + $medal-spacing);
+    }
+}
