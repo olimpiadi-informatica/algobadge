@@ -1,4 +1,5 @@
 import { Category } from "components/category/Category";
+import { Header } from "components/header/Header";
 import { Loading } from "components/loading/Loading";
 import { Login } from "components/login/Login";
 import Tree from "components/tree/Tree";
@@ -32,14 +33,7 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
 
   return (
     <div>
-      <p>
-        Ciao{" "}
-        <strong>
-          {user.firstName} {user.lastName}
-        </strong>
-        ! (Login effettuato tramite{" "}
-        <a href="https://training.olinfo.it">training.olinfo.it</a>)
-      </p>
+      <Header user={user} />
       <Tree badges={badges} setSelectedNode={setSelectedNode} />
       {selectedNode in badges && (
         <Category badge={badges[selectedNode]} badges={badges} />
