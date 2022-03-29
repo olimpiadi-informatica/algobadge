@@ -50,18 +50,30 @@ export function computeCategoryBadges(
       tasks: categoryTasks,
     };
   }
-  for (const node of taskGraph.nodes) {
+
+  const visited = new Set<string>();
+  const dfs = (nodeId: string) => {
+    if (visited.has(nodeId)) return;
+    visited.add(nodeId);
+    const node = categoryBadges[nodeId];
     let locked = false;
-    for (const dep of node.prerequisites) {
-      const numTasks = categoryBadges[dep].node.tasks.length;
+    for (const pre of node.node.prerequisites) {
+      dfs(pre);
+      const preNode = categoryBadges[pre];
+      const numTasks = preNode.node.tasks.length;
       const unlockScore = numTasks * TASK_MAX_SCORE * UNLOCK_SCORE;
-      if (categoryBadges[dep].score < unlockScore) {
+      if (preNode.badge === "locked" || preNode.score < unlockScore) {
         locked = true;
       }
     }
     if (locked) {
-      categoryBadges[node.id].badge = "locked";
+      node.badge = "locked";
     }
+  };
+
+  for (const node of taskGraph.nodes) {
+    dfs(node.id);
   }
+
   return categoryBadges;
 }
