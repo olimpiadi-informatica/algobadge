@@ -56,7 +56,7 @@
                     "name": "ois_truffa"
                 }
             ],
-            "resources_md": "# Videolezione di Andrea Ciprietti (Stage PO 2022)\n\n- [Manoscritto](https://wiki.olinfo.it/2022/lezione_1_-_algoritmica.pdf)\n- [Lezione](https://youtu.be/OWfg-uqAgeQ)\n\n# Videolezione di Giorgio Audrito (Stage PO 2021)\n- [Ricerca, ordinamento, selezione (video)](https://www.youtube.com/watch?v=1_rIGry0IKw)\n- [Ricerca, ordinamento, selezione (slide)](https://wiki.olinfo.it/2021/ricerca_ordinamento_selezione.pdf)\n"
+            "resources_md": "# Videolezioni di Dario Ostuni\n- [Sorting](https://www.youtube.com/watch?v=iG9M_lBOOew)\n- [Searching](https://www.youtube.com/watch?v=8H9UC0KwTQU)\n\n# Videolezione di Andrea Ciprietti (Stage PO 2022)\n\n- [Manoscritto](https://wiki.olinfo.it/2022/lezione_1_-_algoritmica.pdf)\n- [Lezione](https://youtu.be/OWfg-uqAgeQ)\n\n# Videolezione di Giorgio Audrito (Stage PO 2021)\n- [Ricerca, ordinamento, selezione (video)](https://www.youtube.com/watch?v=1_rIGry0IKw)\n- [Ricerca, ordinamento, selezione (slide)](https://wiki.olinfo.it/2021/ricerca_ordinamento_selezione.pdf)\n"
         },
         {
             "title": "Matematica",
@@ -76,7 +76,7 @@
                     "name": "abc_rsa"
                 }
             ],
-            "resources_md": "# Videolezione di Luca Versari (Stage PO 2022)\n- [Manoscritto](https://wiki.olinfo.it/2022/2021-12-05-note-17-22.pdf)\n- [Video](https://youtu.be/eQErzh2y9Kg)\n\n# Dispense UniMI\n\n- [Nozioni di base sulle permutazioni](https://ioi.di.unimi.it/permutazioni.pdf)\n"
+            "resources_md": "# Videolezione di Dario Ostuni\n- [Aritmetica modulare](https://www.youtube.com/watch?v=eroJMT_ODQ0)\n\n# Videolezione di Luca Versari (Stage PO 2022)\n- [Manoscritto](https://wiki.olinfo.it/2022/2021-12-05-note-17-22.pdf)\n- [Video](https://youtu.be/eQErzh2y9Kg)\n\n# Dispense UniMI\n\n- [Nozioni di base sulle permutazioni](https://ioi.di.unimi.it/permutazioni.pdf)\n"
         },
         {
             "title": "Ricorsione e backtracking",
@@ -116,7 +116,7 @@
                     "name": "nonna"
                 }
             ],
-            "resources_md": "# Dispense UniMI\n\n- [Programmazione dinamica](https://ioi.di.unimi.it/dinamica.pdf)\n- [Massima sottosequenza comune](https://ioi.di.unimi.it/maxsubseq.pdf)\n\n# Videolezione di Andrea Ciprietti\n\n- [Manoscritto](https://wiki.olinfo.it/2021/lezione_4_-_dp.pdf)\n- [Lezione](https://www.youtube.com/watch?v=3tOMj7xZv1U)\n\n# Videolezioni di Dario Ostuni\n\n- [Parte 1](https://www.youtube.com/watch?v=dT5wMqCzp9I)\n- [Parte 2](https://www.youtube.com/watch?v=Ubb-SwvMAq4)\n- [Parte 3](https://www.youtube.com/watch?v=30joNrPY7MA)\n- [Parte 4](https://www.youtube.com/watch?v=BCxaH6B5wgg)\n"
+            "resources_md": "# Dispense UniMI\n\n- [Programmazione dinamica](https://ioi.di.unimi.it/dinamica.pdf)\n- [Massima sottosequenza comune](https://ioi.di.unimi.it/maxsubseq.pdf)\n\n# Videolezione di Andrea Ciprietti\n\n- [Manoscritto](https://wiki.olinfo.it/2021/lezione_4_-_dp.pdf)\n- [Lezione](https://www.youtube.com/watch?v=3tOMj7xZv1U)\n\n# Videolezioni di Dario Ostuni\n\n- [Parte 1](https://www.youtube.com/watch?v=dT5wMqCzp9I)\n- [Parte 2](https://www.youtube.com/watch?v=Ubb-SwvMAq4)\n- [Parte 3](https://www.youtube.com/watch?v=30joNrPY7MA)\n- [Parte 4](https://www.youtube.com/watch?v=BCxaH6B5wgg)"
         },
         {
             "title": "Grafi",
@@ -136,7 +136,7 @@
                     "name": "dijkstra"
                 }
             ],
-            "resources_md": "# Videolezione di Edoardo Morassutto (Stage PO 2022)\n- [Grafi, visite, cammini minimi (slide)](https://wiki.olinfo.it/2022/grafi_visite_cammini.pdf)\n- [MST, Union-Find, Topological Sort (slide)](https://wiki.olinfo.it/2022/mst_unionfind_toposort.pdf)\n- [Video](https://youtu.be/j3JTW445TOw)\n\n# Dispense UniMI\n\n- [L'algoritmo di Dijkstra](https://ioi.di.unimi.it/dijkstra.pdf)\n"
+            "resources_md": "# Videolezioni di Dario Ostuni\n- [Intro 1](https://www.youtube.com/watch?v=mIxwWL3oQV8)\n- [Intro 2](https://www.youtube.com/watch?v=_adGyh_FfFI)\n- [DFS e BFS](https://www.youtube.com/watch?v=c3Xb9CztqYE)\n\n# Videolezione di Edoardo Morassutto (Stage PO 2022)\n- [Grafi, visite, cammini minimi (slide)](https://wiki.olinfo.it/2022/grafi_visite_cammini.pdf)\n- [MST, Union-Find, Topological Sort (slide)](https://wiki.olinfo.it/2022/mst_unionfind_toposort.pdf)\n- [Video](https://youtu.be/j3JTW445TOw)\n\n# Dispense UniMI\n\n- [L'algoritmo di Dijkstra](https://ioi.di.unimi.it/dijkstra.pdf)\n"
         },
         {
             "title": "Strutture dati",
@@ -156,7 +156,7 @@
                     "name": "paletta"
                 }
             ],
-            "resources_md": "# Videolezione di Federico Glaudo e Andrea Ciprietti (Stage PO 2021)\n- [Vector, Queue, Linked List, Segment Tree (manoscritto)](https://wiki.olinfo.it/2021/lezione_3_-_strutture_dati.pdf)\n- [Heap, BBST, Hash Set, LCA](https://wiki.olinfo.it/2021/heap_bbst_hashset_lca_dario2994.pdf)\n- [Video](https://youtu.be/OiPTvT8Dlp0)\n\n# CP Algorithms\n- [Fenwick Tree](https://cp-algorithms.com/data_structures/fenwick.html)\n"
+            "resources_md": "# Videolezioni di Dario Ostuni\n- [Parte 1](https://www.youtube.com/watch?v=eroJMT_ODQ0)\n- [Parte 2](https://www.youtube.com/watch?v=VvgN2o8T-98)\n\n# Videolezione di Federico Glaudo e Andrea Ciprietti (Stage PO 2021)\n- [Vector, Queue, Linked List, Segment Tree (manoscritto)](https://wiki.olinfo.it/2021/lezione_3_-_strutture_dati.pdf)\n- [Heap, BBST, Hash Set, LCA](https://wiki.olinfo.it/2021/heap_bbst_hashset_lca_dario2994.pdf)\n- [Video](https://youtu.be/OiPTvT8Dlp0)\n\n# CP Algorithms\n- [Fenwick Tree](https://cp-algorithms.com/data_structures/fenwick.html)\n"
         }
     ]
 }
