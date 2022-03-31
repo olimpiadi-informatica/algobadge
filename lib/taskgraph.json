@@ -116,7 +116,7 @@
                     "name": "nonna"
                 }
             ],
-            "resources_md": "# Dispense UniMI\n\n- [Programmazione dinamica](https://ioi.di.unimi.it/dinamica.pdf)\n- [Massima sottosequenza comune](https://ioi.di.unimi.it/maxsubseq.pdf)\n\n# Videolezione di Andrea Ciprietti\n\n- [Manoscritto](https://wiki.olinfo.it/2021/lezione_4_-_dp.pdf)\n- [Lezione](https://www.youtube.com/watch?v=3tOMj7xZv1U)\n\n# Videolezioni di Dario Ostuni\n\n- [Parte 1](https://www.youtube.com/watch?v=dT5wMqCzp9I)\n- [Parte 2](https://www.youtube.com/watch?v=Ubb-SwvMAq4)\n- [Parte 3](https://www.youtube.com/watch?v=30joNrPY7MA)\n- [Parte 4](https://www.youtube.com/watch?v=BCxaH6B5wgg)"
+            "resources_md": "# Dispense UniMI\n\n- [Programmazione dinamica](https://ioi.di.unimi.it/dinamica.pdf)\n- [Massima sottosequenza comune](https://ioi.di.unimi.it/maxsubseq.pdf)\n\n# Videolezione di Andrea Ciprietti\n\n- [Manoscritto](https://wiki.olinfo.it/2021/lezione_4_-_dp.pdf)\n- [Video](https://www.youtube.com/watch?v=3tOMj7xZv1U)\n\n# Videolezioni di Dario Ostuni\n\n- [Parte 1](https://www.youtube.com/watch?v=dT5wMqCzp9I)\n- [Parte 2](https://www.youtube.com/watch?v=Ubb-SwvMAq4)\n- [Parte 3](https://www.youtube.com/watch?v=30joNrPY7MA)\n- [Parte 4](https://www.youtube.com/watch?v=BCxaH6B5wgg)"
         },
         {
             "title": "Grafi",
