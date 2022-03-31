@@ -30,7 +30,7 @@
             ],
             "tasks": [
                 {
-                    "name": "map"
+                    "name": "catalogo"
                 },
                 {
                     "name": "cestini"
@@ -133,7 +133,7 @@
                     "name": "ois_islands"
                 },
                 {
-                    "name": "dijkstra"
+                    "name": "mincammino"
                 }
             ],
             "resources_md": "In questo argomento si affrontano problemi su grafi, costituiti da nodi collegati a coppie da archi, tramite visite e calcolo di cammini minimi. Seguono materiali sull'argomento.\n\n# Videolezioni di Dario Ostuni\n- [Intro 1](https://www.youtube.com/watch?v=mIxwWL3oQV8)\n- [Intro 2](https://www.youtube.com/watch?v=_adGyh_FfFI)\n- [DFS e BFS](https://www.youtube.com/watch?v=c3Xb9CztqYE)\n\n# Videolezione di Edoardo Morassutto (Stage PO 2022)\n\n- [Videolezione](https://youtu.be/j3JTW445TOw)\n- [Grafi, visite, cammini minimi (slide)](https://wiki.olinfo.it/2022/grafi_visite_cammini.pdf)\n- [MST, Union-Find, Topological Sort (slide)](https://wiki.olinfo.it/2022/mst_unionfind_toposort.pdf)\n\n# Videolezione di Edoardo Morassutto (Stage PO 2021)\n\n- [Videolezione](https://www.youtube.com/watch?v=LsbScEjDibA)\n\n# Dispense UniMI\n\n- [L'algoritmo di Dijkstra](https://ioi.di.unimi.it/dijkstra.pdf)\n"
