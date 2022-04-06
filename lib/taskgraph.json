@@ -10,10 +10,10 @@
             ],
             "tasks": [
                 {
-                    "name": "easy1"
+                    "name": "biglietti"
                 },
                 {
-                    "name": "biglietti"
+                    "name": "massimo"
                 }
             ],
             "resources_md": "Questo argomento è dedicato a prendere confidenza con il sistema di training e con il formato dei problemi, grader e subtask di varia complessità. Se ti serve, puoi sfruttare i seguenti video tutorial sull'uso della piattaforma.\n\n## Tutorial di William Di Luigi (competenze digitali)\n\n- [Uso piattaforma (linguaggio C)](https://youtu.be/YAmpEiGJFVs)\n- [Uso piattaforma (linguaggio Pascal)](https://youtu.be/S954uarh-z0)\n\nSe hai bisogno di approfondire le basi della programmazione, puoi seguire questi video corsi a puntate:\n\n## Videolezioni di Romeo Rizzi (corso UniVR)\n\n- [Lezione 1 (linguaggio C)](https://youtu.be/QW7A7efKzoY)\n- [Lezione 1 (linguaggio Pascal)](https://youtu.be/DYy2IbteC2U)\n\nSeguono alcuni materiali di approfondimento sulla teoria generale degli algoritmi, anche se non strettamente necessari per superare questo argomento.\n\n## Videolezione di Giorgio Audrito (Stage PO 2021)\n\n- [Parlare di algoritmi (slides)](https://wiki.olinfo.it/2021/parlare_di_algoritmi.pdf)\n- [Videolezione (solo prima parte)](https://youtu.be/8sr5Of-Bb1s)\n\n## Videolezione di Andrea Ciprietti (Stage PO 2022)\n\n- [Videolezione (solo prima parte)](https://youtu.be/OWfg-uqAgeQ)\n- [Manoscritto (solo prima parte)](https://wiki.olinfo.it/2022/lezione_1_-_algoritmica.pdf)\n"
