@@ -1,4 +1,5 @@
 import cookie from "cookie";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export type LoggedUser = {
@@ -26,12 +27,29 @@ function getParsedCookie(): LoggedUser | null {
   }
 }
 
+function getImpersonatedUser(username: string): LoggedUser {
+  return {
+    username,
+    picture: "",
+    firstName: username,
+    lastName: "",
+    email: "",
+    id: 0,
+  };
+}
+
 export function useLoggedUser(): LoggedUser | null | undefined {
+  const router = useRouter();
   const [loggedUser, setLoggedUser] = useState<LoggedUser | null | undefined>(
     undefined
   );
   useEffect(() => {
-    setLoggedUser(getParsedCookie());
-  }, []);
+    if (router.query.impersonate) {
+      console.log("Impersonating", router.query.impersonate);
+      setLoggedUser(getImpersonatedUser(router.query.impersonate as string));
+    } else {
+      setLoggedUser(getParsedCookie());
+    }
+  }, [router.query.impersonate]);
   return loggedUser;
 }
