@@ -29,7 +29,8 @@ function computeBadge(score: number, numTasks: number): Badge {
 
 export function computeCategoryBadges(
   taskGraph: TaskGraph,
-  userInfo: UserInfo
+  userInfo: UserInfo,
+  unlockEverything: boolean
 ): CategoryBadges {
   const categoryBadges: CategoryBadges = {};
   const taskScores = Object.fromEntries(
@@ -66,7 +67,7 @@ export function computeCategoryBadges(
         locked = true;
       }
     }
-    if (locked) {
+    if (locked && !unlockEverything) {
       node.badge = "locked";
     }
   };

@@ -7,9 +7,11 @@ import { useLoggedUser } from "lib/auth";
 import { computeCategoryBadges } from "lib/badges";
 import { getTaskGraph, TaskGraph } from "lib/taskgraph";
 import { getUserInfo, UserInfo } from "lib/training-api";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
+  const router = useRouter();
   const user = useLoggedUser();
   const [userInfo, setUserInfo] = useState<UserInfo | null | undefined>(
     undefined
@@ -28,8 +30,9 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
 
   if (user === undefined || userInfo === undefined) return <Loading />;
   if (user === null || userInfo === null) return <Login />;
+  const unlockEverything = router.query.unlock === "true";
 
-  const badges = computeCategoryBadges(taskGraph, userInfo);
+  const badges = computeCategoryBadges(taskGraph, userInfo, unlockEverything);
 
   return (
     <div>
