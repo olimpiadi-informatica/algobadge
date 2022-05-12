@@ -1,10 +1,12 @@
 import { Category } from "components/category/Category";
+import { MedalIcon } from "components/category/Progress";
 import { Header } from "components/header/Header";
 import { Loading } from "components/loading/Loading";
 import { Login } from "components/login/Login";
+import { Title } from "components/title/Title";
 import Tree from "components/tree/Tree";
 import { useLoggedUser } from "lib/auth";
-import { computeCategoryBadges } from "lib/badges";
+import { badgeColor, computeCategoryBadges, getTotalBadge } from "lib/badges";
 import { getTaskGraph, TaskGraph } from "lib/taskgraph";
 import { getUserInfo, UserInfo } from "lib/training-api";
 import { useRouter } from "next/router";
@@ -33,10 +35,11 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
   const unlockEverything = router.query.unlock === "true";
 
   const badges = computeCategoryBadges(taskGraph, userInfo, unlockEverything);
+  const totalBadge = getTotalBadge(badges);
 
   return (
     <div>
-      <Header user={user} />
+      <Header user={user} badge={totalBadge} />
       <Tree badges={badges} setSelectedNode={setSelectedNode} />
       {selectedNode in badges && (
         <Category badge={badges[selectedNode]} badges={badges} />

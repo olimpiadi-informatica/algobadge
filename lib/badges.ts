@@ -7,6 +7,10 @@ export const BRONZE_SCORE = 100 / 200;
 export const SILVER_SCORE = 150 / 200;
 export const GOLD_SCORE = 200 / 200;
 
+export const BRONZE_COLOR = "#cd7f32";
+export const SILVER_COLOR = "#c0c0c0";
+export const GOLD_COLOR = "#ffdf00";
+
 export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
 
 export type TaskScores = { [taskId: string]: number };
@@ -19,6 +23,36 @@ export type CategoryBadge = {
 };
 
 export type CategoryBadges = { [category: string]: CategoryBadge };
+
+function badgeValue(badge: Badge): number {
+  switch (badge) {
+    case "locked":
+      return 0;
+    case "none":
+      return 1;
+    case "bronze":
+      return 2;
+    case "silver":
+      return 3;
+    case "gold":
+      return 4;
+  }
+}
+
+export function badgeColor(badge: Badge): string {
+  switch (badge) {
+    case "locked":
+      return "black";
+    case "none":
+      return "black";
+    case "bronze":
+      return BRONZE_COLOR;
+    case "silver":
+      return SILVER_COLOR;
+    case "gold":
+      return GOLD_COLOR;
+  }
+}
 
 function computeBadge(score: number, numTasks: number): Badge {
   if (score >= TASK_MAX_SCORE * numTasks * GOLD_SCORE) return "gold";
@@ -77,4 +111,15 @@ export function computeCategoryBadges(
   }
 
   return categoryBadges;
+}
+
+export function getTotalBadge(categoryBadges: CategoryBadges): Badge {
+  const badges = Object.values(categoryBadges).map((badge) => badge.badge);
+  let lowest: Badge = "gold";
+  for (const badge of badges) {
+    if (badgeValue(badge) < badgeValue(lowest)) {
+      lowest = badge;
+    }
+  }
+  return lowest;
 }

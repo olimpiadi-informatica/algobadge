@@ -1,7 +1,10 @@
 import styles from "./Progress.module.scss";
 import {
+  BRONZE_COLOR,
   BRONZE_SCORE,
+  GOLD_COLOR,
   GOLD_SCORE,
+  SILVER_COLOR,
   SILVER_SCORE,
   TASK_MAX_SCORE,
   UNLOCK_SCORE,
@@ -9,7 +12,7 @@ import {
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 import { OverlayInjectedProps } from "react-bootstrap/esm/Overlay";
 
-function MedalIcon({ color }: { color: string }) {
+export function MedalIcon({ color }: { color: string }) {
   return (
     <svg fill={color} width={"35px"} height={"35px"} viewBox="0 0 1024 1024">
       <path d="M547 304.2h-451l108.2-207.8h481.4z M685.6 754.4c0 95.656-77.544 173.2-173.2 173.2s-173.2-77.544-173.2-173.2c0-95.656 77.544-173.2 173.2-173.2s173.2 77.544 173.2 173.2z M697.8 598.2l230.2-294-138.6-207.8-276.6 415.6c64.6 0 125.4 25.4 171 71 5 5 9.6 10 14 15.2z M411.6 533.2l-107-161.2h-207.8l180.2 323c10.4-42.4 32.2-81.2 64-112.8 20.8-20.6 44.6-37.2 70.6-49z" />
@@ -41,9 +44,9 @@ function LockIcon({ color }: { color: string }) {
 
 function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
   const checkpoints = [
-    { position: BRONZE_SCORE, color: "#cd7f32" },
-    { position: SILVER_SCORE, color: "#c0c0c0" },
-    { position: GOLD_SCORE, color: "#ffdf00" },
+    { position: BRONZE_SCORE, color: BRONZE_COLOR },
+    { position: SILVER_SCORE, color: SILVER_COLOR },
+    { position: GOLD_SCORE, color: GOLD_COLOR },
   ];
   return (
     <>
