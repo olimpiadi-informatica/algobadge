@@ -44,12 +44,18 @@ export function useLoggedUser(): LoggedUser | null | undefined {
     undefined
   );
   useEffect(() => {
+    if (!router.isReady) return;
     if (router.query.impersonate) {
-      console.log("Impersonating", router.query.impersonate);
-      setLoggedUser(getImpersonatedUser(router.query.impersonate as string));
+      const impersonatedUser = getImpersonatedUser(
+        router.query.impersonate as string
+      );
+      console.log("Impersonating", impersonatedUser);
+      setLoggedUser(impersonatedUser);
     } else {
-      setLoggedUser(getParsedCookie());
+      const parsedCookie = getParsedCookie();
+      console.log("User is", parsedCookie);
+      setLoggedUser(parsedCookie);
     }
-  }, [router.query.impersonate]);
+  }, [router.query.impersonate, router.isReady]);
   return loggedUser;
 }
