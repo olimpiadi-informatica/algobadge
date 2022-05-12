@@ -1,6 +1,16 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals"
+  ],
   "rules": {
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-inferrable-types": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "destructuredArrayIgnorePattern": "^_" }
+    ]
   }
 }

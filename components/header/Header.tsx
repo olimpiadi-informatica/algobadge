@@ -1,4 +1,3 @@
-import { LoggedUser } from "lib/auth";
 import { ProfilePicture } from "./ProfilePicture";
 import styles from "./Header.module.scss";
 import { Badge, badgeColor } from "lib/badges";
