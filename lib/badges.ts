@@ -39,12 +39,12 @@ function badgeValue(badge: Badge): number {
   }
 }
 
-export function badgeColor(badge: Badge): string {
+export function badgeColor(badge: Badge): string | null {
   switch (badge) {
     case "locked":
-      return "black";
+      return null;
     case "none":
-      return "black";
+      return null;
     case "bronze":
       return BRONZE_COLOR;
     case "silver":

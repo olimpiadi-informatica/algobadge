@@ -1,12 +1,10 @@
 import { Category } from "components/category/Category";
-import { MedalIcon } from "components/category/Progress";
 import { Header } from "components/header/Header";
 import { Loading } from "components/loading/Loading";
 import { Login } from "components/login/Login";
-import { Title } from "components/title/Title";
 import Tree from "components/tree/Tree";
 import { useLoggedUser } from "lib/auth";
-import { badgeColor, computeCategoryBadges, getTotalBadge } from "lib/badges";
+import { computeCategoryBadges, getTotalBadge } from "lib/badges";
 import { getTaskGraph, TaskGraph } from "lib/taskgraph";
 import { getUserInfo, UserInfo } from "lib/training-api";
 import { useRouter } from "next/router";
