@@ -6,6 +6,9 @@ export type TaskScore = {
 
 export type UserInfo = {
   username: string;
+  mail_hash: string;
+  first_name: string;
+  last_name: string;
   success: number;
   scores: TaskScore[];
 };

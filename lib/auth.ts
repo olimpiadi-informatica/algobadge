@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 
 export type LoggedUser = {
   username: string;
-  picture: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  id: number;
+  impersonated?: boolean;
 };
 
 function getParsedCookie(): LoggedUser | null {
@@ -30,11 +26,7 @@ function getParsedCookie(): LoggedUser | null {
 function getImpersonatedUser(username: string): LoggedUser {
   return {
     username,
-    picture: "",
-    firstName: username,
-    lastName: "",
-    email: "",
-    id: 0,
+    impersonated: true,
   };
 }
 
