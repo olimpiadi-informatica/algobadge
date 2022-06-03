@@ -8,7 +8,7 @@ tasks:
 - name: ois_cabala
 - name: ois_solitario
 ---
-I problemi di questo argomento richiedono di esplorare lo spazio delle possibili soluzioni per tentativi ed errori, tramite ricorsione ottimizzata da euristiche e buonds. Se non sei familiare con la ricorsione, puoi seguire questa lezione sull'argomento.
+I problemi di questo argomento richiedono di esplorare lo spazio delle possibili soluzioni per tentativi ed errori, tramite ricorsione ottimizzata da euristiche e bounds. Se non sei familiare con la ricorsione, puoi seguire questa lezione sull'argomento.
 ## Videolezione di Giorgio Audrito (Stage PO 2021)
 
 - [Induzione, ricorsione, esponenziazione veloce (slides)](https://wiki.olinfo.it/2021/ricorsione_fastexp.pdf)
