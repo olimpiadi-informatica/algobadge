@@ -17,6 +17,10 @@ Questo argomento è dedicato a prendere confidenza con il sistema di training e 
 
 Se hai bisogno di approfondire le basi della programmazione, puoi seguire questi video corsi a puntate:
 
+## Guida ai grader di Edoardo Morassutto
+
+- [Grader](https://wiki.olinfo.it/it/Guide/grader)
+
 ## Videolezioni di Romeo Rizzi (corso UniVR)
 
 - [Lezione 1 (linguaggio C)](https://youtu.be/QW7A7efKzoY)
