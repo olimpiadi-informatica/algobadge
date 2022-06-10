@@ -14,11 +14,14 @@ import styles from "./Bulk.module.scss";
 export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
   const [usernames, setUsernames] = useState<string>("");
   const [results, setResults] = useState<Record<string, CategoryBadges>>({});
-  const usernameList = usernames
-    .split("\n")
-    .map((s) => s.trim())
-    .filter((s) => s !== "");
-  // TODO: remove duplicates
+  const usernameList = [
+    ...new Set(
+      usernames
+        .split("\n")
+        .map((s) => s.trim())
+        .filter((s) => s !== "")
+    ),
+  ];
 
   const load = () => {
     setResults({});
@@ -42,10 +45,9 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
         as="textarea"
         placeholder="Inserisci la lista di username, uno per riga"
         onChange={(e) => setUsernames(e.target.value)}
+        value={usernames}
         className={styles.usernames}
-      >
-        {usernames}
-      </FormControl>
+      />
       <Button onClick={() => load()}>Via!</Button>
       <hr />
       <Table striped hover responsive>
