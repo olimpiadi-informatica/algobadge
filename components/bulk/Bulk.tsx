@@ -13,7 +13,8 @@ import styles from "./Bulk.module.scss";
 
 type Sum = { gold: number; silver: number; bronze: number; none: number };
 
-function MedalSummary({ sum }: { sum: Sum }) {
+function MedalSummary({ sum, numStudents }: { sum: Sum; numStudents: number }) {
+  const missing = numStudents - Object.values(sum).reduce((s, a) => s + a, 0);
   return (
     <>
       {(["gold", "silver", "bronze"] as const).map((medal) => (
@@ -27,6 +28,11 @@ function MedalSummary({ sum }: { sum: Sum }) {
         <MedalIcon color={"#555"} size={20} />
         &nbsp;
         {sum.none}
+      </div>
+      <div className={styles.medalSummary}>
+        <MedalIcon color={"#eee"} size={20} />
+        ?&nbsp;
+        {missing}
       </div>
     </>
   );
@@ -104,6 +110,7 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
         <Table striped hover responsive>
           <thead>
             <tr>
+              <th />
               <th>Username</th>
               <th className={styles.totalColumn}>Total</th>
               {taskGraph.nodes.map((node) => (
@@ -114,8 +121,9 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
             </tr>
           </thead>
           <tbody>
-            {usernameList.map((username) => (
+            {usernameList.map((username, index) => (
               <tr key={username}>
+                <td>{index + 1}</td>
                 <td>
                   <a
                     href={`/?impersonate=${username}`}
@@ -154,12 +162,19 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
             ))}
             <tr>
               <td />
+              <td />
               <td className={styles.totalColumn}>
-                <MedalSummary sum={totalSum} />
+                <MedalSummary
+                  numStudents={usernameList.length}
+                  sum={totalSum}
+                />
               </td>
               {taskGraph.nodes.map((node) => (
                 <td key={node.id} className={styles.badgeColumn}>
-                  <MedalSummary sum={badgeSum[node.id]} />
+                  <MedalSummary
+                    numStudents={usernameList.length}
+                    sum={badgeSum[node.id]}
+                  />
                 </td>
               ))}
             </tr>
