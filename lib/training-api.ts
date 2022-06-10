@@ -25,7 +25,9 @@ export async function getUserInfo(username: string): Promise<UserInfo | null> {
       credentials: "include",
     });
     if (req.status !== 200) return null;
-    return await req.json();
+    const data = await req.json();
+    if (data.success !== 1) return null;
+    return data;
   } catch {
     return null;
   }
