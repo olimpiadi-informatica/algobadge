@@ -67,7 +67,9 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
 
   const badgeSum: Record<string, Sum> = {};
   const totalSum: Sum = { gold: 0, silver: 0, bronze: 0, none: 0 };
+  let oneOff = 0;
   for (const badges of Object.values(results)) {
+    let missingBadges = 0;
     for (const [cat, badge] of Object.entries(badges)) {
       if (!(cat in badgeSum)) {
         badgeSum[cat] = { gold: 0, silver: 0, bronze: 0, none: 0 };
@@ -80,6 +82,7 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
         badgeSum[cat][badge.badge] += 1;
       } else {
         badgeSum[cat].none += 1;
+        missingBadges += 1;
       }
     }
     const totalBadge = getTotalBadge(badges);
@@ -91,6 +94,9 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
       totalSum[totalBadge] += 1;
     } else {
       totalSum.none += 1;
+    }
+    if (missingBadges === 1) {
+      oneOff += 1;
     }
   }
 
@@ -168,6 +174,21 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
                   numStudents={usernameList.length}
                   sum={totalSum}
                 />
+                <hr />
+                <div className={styles.medalSummary}>
+                  <abbr title="At least bronze">
+                    &ge;
+                    <MedalIcon color={badgeColor("bronze")} size={20} />{" "}
+                  </abbr>
+                  {totalSum.gold + totalSum.silver + totalSum.bronze}
+                </div>
+                <div className={styles.medalSummary}>
+                  <abbr title="At most one badge from bronze">
+                    ~
+                    <MedalIcon color={badgeColor("bronze")} size={20} />{" "}
+                  </abbr>
+                  {totalSum.gold + totalSum.silver + totalSum.bronze + oneOff}
+                </div>
               </td>
               {taskGraph.nodes.map((node) => (
                 <td key={node.id} className={styles.badgeColumn}>
