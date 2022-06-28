@@ -67,7 +67,6 @@ export function computeCategoryBadges(
   unlockEverything: boolean
 ): CategoryBadges {
   const categoryBadges: CategoryBadges = {};
-  console.log(userInfo.scores, userInfo);
   const taskScores = Object.fromEntries(
     userInfo.scores.map((task) => [task.name, task.score])
   );
