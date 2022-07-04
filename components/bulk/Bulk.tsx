@@ -6,7 +6,7 @@ import {
   getTotalBadge,
 } from "lib/badges";
 import { TaskGraph } from "lib/taskgraph";
-import { getUserInfo } from "lib/training-api";
+import { getUserInfo, UserInfo } from "lib/training-api";
 import { useState } from "react";
 import { Button, FormControl, Table } from "react-bootstrap";
 import styles from "./Bulk.module.scss";
@@ -40,6 +40,7 @@ function MedalSummary({ sum, numStudents }: { sum: Sum; numStudents: number }) {
 
 export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
   const [usernames, setUsernames] = useState<string>("");
+  const [userInfo, setUserInfo] = useState<Record<string, UserInfo>>({});
   const [results, setResults] = useState<Record<string, CategoryBadges>>({});
   const usernameList = [
     ...new Set(
@@ -52,11 +53,13 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
 
   const load = () => {
     setResults({});
+    setUserInfo({});
     for (const username of usernameList) {
       getUserInfo(username)
-        .then((info) =>
-          info ? computeCategoryBadges(taskGraph, info, false) : null
-        )
+        .then((info) => {
+          if (info) setUserInfo((old) => ({ ...old, [info.username]: info }));
+          return info ? computeCategoryBadges(taskGraph, info, false) : null;
+        })
         .then((badges) => {
           if (badges) {
             setResults((old) => ({ ...old, [username]: badges }));
@@ -136,7 +139,13 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <code>{username}</code>
+                    <code>{username}</code>{" "}
+                    {username in userInfo && (
+                      <em>
+                        ({userInfo[username].first_name}{" "}
+                        {userInfo[username].last_name})
+                      </em>
+                    )}
                   </a>
                 </td>
                 {username in results ? (
