@@ -4,7 +4,7 @@ id: intro
 prerequisites: []
 position: [1, 2]
 tasks:
-- name: biglietti
+- name: ois_biglietti
 - name: massimo
 ---
 

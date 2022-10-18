@@ -6,7 +6,7 @@ prerequisites:
 position: [4, 2]
 tasks:
 - name: segtree
-- name: paletta
+- name: oii_paletta
 ---
 Questo argomento è dedicato alla programmazione di strutture dati, che memorizzano informazioni in modo da essere gestite efficientemente. Se preferisci del materiale scritto, puoi leggere questa dispensa sulle strutture dati per query su array.
 

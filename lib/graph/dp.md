@@ -6,7 +6,7 @@ prerequisites:
 position: [3, 3]
 tasks:
 - name: preoii_treni
-- name: nonna
+- name: ois_nonna
 ---
 In questo argomento si affronta la programmazione dinamica, per cui algoritmi ricorsivi esponenziali diventano polinomiali, tramite memorizzazione dei risultati di sotto-problemi. Se vuoi del materiale scritto sull'argomento, puoi sfruttare queste dispense.
 
