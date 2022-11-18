@@ -2,7 +2,7 @@
 title: Programmazione dinamica
 id: dp
 prerequisites:
-- bnb
+- rec
 position: [3, 3]
 tasks:
 - name: preoii_treni

@@ -1,6 +1,6 @@
 ---
 title: Ricorsione e backtracking
-id: bnb
+id: rec
 prerequisites:
 - intro
 position: [2, 3]
