@@ -2,7 +2,7 @@
 title: Grafi
 id: grafi
 prerequisites:
-- stl
+- lib
 position: [3, 2]
 tasks:
 - name: ois_islands

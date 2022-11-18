@@ -1,6 +1,6 @@
 ---
-title: C++ STL
-id: stl
+title: Funzioni di Libreria
+id: lib
 prerequisites:
 - intro
 position: [2, 1]

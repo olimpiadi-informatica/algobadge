@@ -2,7 +2,7 @@
 title: Greedy, sorting e searching
 id: greedy
 prerequisites:
-- stl
+- lib
 position: [3, 1]
 tasks:
 - name: abc_quadri
