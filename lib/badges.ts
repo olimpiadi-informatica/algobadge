@@ -14,12 +14,14 @@ export const GOLD_COLOR = "#ffdf00";
 export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
 
 export type TaskScores = { [taskId: string]: number };
+export type TaskURLs = { [taskId: string]: string };
 
 export type CategoryBadge = {
   node: Node;
   score: number;
   badge: Badge;
   tasks: TaskScores;
+  task_urls: TaskURLs;
 };
 
 export type CategoryBadges = { [category: string]: CategoryBadge };
@@ -73,9 +75,14 @@ export function computeCategoryBadges(
   for (const node of taskGraph.nodes) {
     let score = 0;
     const categoryTasks: TaskScores = {};
+    const categoryTaskURLs: TaskURLs = {};
     for (const task of node.tasks) {
       const taskScore = taskScores[task.name] ?? 0;
       categoryTasks[task.name] = taskScore;
+      categoryTaskURLs[task.name] = 'https://training.olinfo.it/#/task/' + task.name + '/statement';
+      if (task.terry) {
+        categoryTaskURLs[task.name] = 'https://territoriali.olinfo.it/task/' + task.name;
+      }
       score += taskScore;
     }
     categoryBadges[node.id] = {
@@ -83,6 +90,7 @@ export function computeCategoryBadges(
       score,
       badge: computeBadge(score, node.tasks.length),
       tasks: categoryTasks,
+      task_urls: categoryTaskURLs,
     };
   }
 

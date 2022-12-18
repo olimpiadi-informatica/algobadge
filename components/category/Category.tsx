@@ -2,6 +2,7 @@ import {
   CategoryBadge,
   CategoryBadges,
   TaskScores,
+  TaskURLs,
   TASK_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
@@ -10,12 +11,12 @@ import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
 
-function TaskList({ tasks }: { tasks: TaskScores }) {
-  const Task = ({ task, score }: { task: string; score: number }) => {
+function TaskList({ tasks , task_urls }: { tasks: TaskScores, task_urls: TaskURLs }) {
+  const Task = ({ task, score, url }: { task: string; score: number, url: string }) => {
     return (
       <li>
         <a
-          href={`https://training.olinfo.it/#/task/${task}/statement`}
+          href={`${url}`}
           rel="noreferrer"
           target="_blank"
         >
@@ -29,7 +30,7 @@ function TaskList({ tasks }: { tasks: TaskScores }) {
   return (
     <ul>
       {Object.entries(tasks).map(([task, score]) => (
-        <Task task={task} score={score} key={task} />
+        <Task task={task} score={score} url={task_urls[task]} key={task} />
       ))}
     </ul>
   );
@@ -61,7 +62,7 @@ export function Category({
             nextCategories={nextCategories}
           />
           <div className={styles.taskList}>
-            <TaskList tasks={badge.tasks} />
+            <TaskList tasks={badge.tasks} task_urls={badge.task_urls} />
           </div>
           <div className={styles.resources}>
             <ReactMarkdown
