@@ -10,6 +10,7 @@ import React from "react";
 import { Progress } from "./Progress";
 import { Task } from "lib/taskgraph";
 import { round } from "lib/round";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 function TaskList({ category }: { category: CategoryBadge }) {
   const Task = ({
@@ -21,12 +22,26 @@ function TaskList({ category }: { category: CategoryBadge }) {
     score: number;
     url: string;
   }) => {
+    const maxScore = task.maxScore ?? DEFAULT_MAX_SCORE;
+    const scoreMessage = `${round(score, 1)} / ${maxScore}`;
     return (
       <li>
         <a href={url} rel="noreferrer" target="_blank">
           {task.name}
         </a>{" "}
-        ({round(score, 1)} / {task.maxScore ?? DEFAULT_MAX_SCORE})
+        {task.terry ? (
+          <OverlayTrigger
+            overlay={
+              <Tooltip>
+                Punteggio del problema scalato su {maxScore} punti.
+              </Tooltip>
+            }
+          >
+            <span>({scoreMessage}*)</span>
+          </OverlayTrigger>
+        ) : (
+          scoreMessage
+        )}
       </li>
     );
   };
