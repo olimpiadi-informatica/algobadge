@@ -6,7 +6,6 @@ import {
   GOLD_SCORE,
   SILVER_COLOR,
   SILVER_SCORE,
-  TASK_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
@@ -94,14 +93,14 @@ function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
 
 export function Progress({
   score,
-  numTasks,
+  maxScore,
   nextCategories,
 }: {
   score: number;
-  numTasks: number;
+  maxScore: number;
   nextCategories: string[];
 }) {
-  if (score === numTasks * TASK_MAX_SCORE) {
+  if (score === maxScore) {
     return (
       <div className={styles.progress}>
         <ProgressBar>
@@ -129,7 +128,7 @@ export function Progress({
       className: styles.progressNone,
     },
   ];
-  const scorePerc = score / numTasks / TASK_MAX_SCORE;
+  const scorePerc = score / maxScore;
   for (const cutoff of cutoffs) {
     if (scorePerc >= cutoff.from) {
       pieces.push(
@@ -148,19 +147,19 @@ export function Progress({
     let message = "";
     if (scorePerc < UNLOCK_SCORE && nextCategories.length > 0) {
       message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * UNLOCK_SCORE - score
+        maxScore * UNLOCK_SCORE - score
       } punti per sbloccare le prossime categorie`;
     } else if (scorePerc < BRONZE_SCORE) {
       message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * BRONZE_SCORE - score
+        maxScore * BRONZE_SCORE - score
       } punti per sbloccare il badge di bronzo!`;
     } else if (scorePerc < SILVER_SCORE) {
       message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * SILVER_SCORE - score
+        maxScore * SILVER_SCORE - score
       } punti per sbloccare il badge di argento!`;
     } else if (scorePerc < GOLD_SCORE) {
       message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * GOLD_SCORE - score
+        maxScore * GOLD_SCORE - score
       } punti per sbloccare il badge d'oro!`;
     } else {
       return null;

@@ -1,46 +1,44 @@
 import {
   CategoryBadge,
   CategoryBadges,
-  TaskScores,
-  TaskURLs,
-  TASK_MAX_SCORE,
+  DEFAULT_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
 import styles from "./Category.module.scss";
 import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
+import { Task } from "lib/taskgraph";
 
-function TaskList({
-  tasks,
-  taskURLs,
-}: {
-  tasks: TaskScores;
-  taskURLs: TaskURLs;
-}) {
+function TaskList({ category }: { category: CategoryBadge }) {
   const Task = ({
     task,
     score,
     url,
   }: {
-    task: string;
+    task: Task;
     score: number;
     url: string;
   }) => {
     return (
       <li>
         <a href={url} rel="noreferrer" target="_blank">
-          {task}
+          {task.name}
         </a>{" "}
-        ({score} / {TASK_MAX_SCORE})
+        ({score} / {task.maxScore ?? DEFAULT_MAX_SCORE})
       </li>
     );
   };
 
   return (
     <ul>
-      {Object.entries(tasks).map(([task, score]) => (
-        <Task task={task} score={score} url={taskURLs[task]} key={task} />
+      {category.node.tasks.map((task) => (
+        <Task
+          task={task}
+          score={category.tasks[task.name]}
+          url={category.taskURLs[task.name]}
+          key={task.name}
+        />
       ))}
     </ul>
   );
@@ -53,10 +51,16 @@ export function Category({
   badge: CategoryBadge;
   badges: CategoryBadges;
 }) {
-  const unlockScore = badge.node.prerequisites.map(
-    (p) => Object.keys(badges[p].tasks).length * TASK_MAX_SCORE
+  const unlockScore = badge.node.prerequisites.map((p) =>
+    badges[p].node.tasks.reduce(
+      (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+      0
+    )
   );
-  const numTasks = badge.node.tasks.length;
+  const maxScore = badge.node.tasks.reduce(
+    (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+    0
+  );
   const nextCategories = Object.values(badges)
     .filter((b) => b.node.prerequisites.includes(badge.node.id))
     .map((b) => b.node.id);
@@ -68,11 +72,11 @@ export function Category({
         <>
           <Progress
             score={badge.score}
-            numTasks={numTasks}
+            maxScore={maxScore}
             nextCategories={nextCategories}
           />
           <div className={styles.taskList}>
-            <TaskList tasks={badge.tasks} taskURLs={badge.taskURLs} />
+            <TaskList category={badge} />
           </div>
           <div className={styles.resources}>
             <ReactMarkdown

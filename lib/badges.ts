@@ -1,7 +1,7 @@
 import { Node, TaskGraph } from "./taskgraph";
 import { UserInfo } from "./training-api";
 
-export const TASK_MAX_SCORE = 100;
+export const DEFAULT_MAX_SCORE = 100;
 export const UNLOCK_SCORE = 50 / 200;
 export const BRONZE_SCORE = 100 / 200;
 export const SILVER_SCORE = 150 / 200;
@@ -56,10 +56,10 @@ export function badgeColor(badge: Badge): string | null {
   }
 }
 
-function computeBadge(score: number, numTasks: number): Badge {
-  if (score >= TASK_MAX_SCORE * numTasks * GOLD_SCORE) return "gold";
-  if (score >= TASK_MAX_SCORE * numTasks * SILVER_SCORE) return "silver";
-  if (score >= TASK_MAX_SCORE * numTasks * BRONZE_SCORE) return "bronze";
+function computeBadge(score: number, maxScore: number): Badge {
+  if (score >= maxScore * GOLD_SCORE) return "gold";
+  if (score >= maxScore * SILVER_SCORE) return "silver";
+  if (score >= maxScore * BRONZE_SCORE) return "bronze";
   return "none";
 }
 
@@ -76,6 +76,7 @@ export function computeCategoryBadges(
     let score = 0;
     const categoryTasks: TaskScores = {};
     const categoryTaskURLs: TaskURLs = {};
+    let maxScore = 0;
     for (const task of node.tasks) {
       const taskScore = taskScores[task.name] ?? 0;
       categoryTasks[task.name] = taskScore;
@@ -87,11 +88,12 @@ export function computeCategoryBadges(
       }
       categoryTaskURLs[task.name] = url;
       score += taskScore;
+      maxScore += task.maxScore ?? DEFAULT_MAX_SCORE;
     }
     categoryBadges[node.id] = {
       node,
       score,
-      badge: computeBadge(score, node.tasks.length),
+      badge: computeBadge(score, maxScore),
       tasks: categoryTasks,
       taskURLs: categoryTaskURLs,
     };
@@ -106,8 +108,11 @@ export function computeCategoryBadges(
     for (const pre of node.node.prerequisites) {
       dfs(pre);
       const preNode = categoryBadges[pre];
-      const numTasks = preNode.node.tasks.length;
-      const unlockScore = numTasks * TASK_MAX_SCORE * UNLOCK_SCORE;
+      const maxScore = preNode.node.tasks.reduce(
+        (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+        0
+      );
+      const unlockScore = maxScore * UNLOCK_SCORE;
       if (preNode.badge === "locked" || preNode.score < unlockScore) {
         locked = true;
       }

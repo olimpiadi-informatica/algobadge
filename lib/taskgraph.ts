@@ -4,6 +4,7 @@ import yaml from "js-yaml";
 export type Task = {
   name: string;
   terry?: boolean;
+  maxScore?: number;
 };
 
 export type Node = {

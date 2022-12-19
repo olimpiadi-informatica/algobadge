@@ -1,4 +1,4 @@
-import { CategoryBadge, CategoryBadges, TASK_MAX_SCORE } from "lib/badges";
+import { CategoryBadge, CategoryBadges, DEFAULT_MAX_SCORE } from "lib/badges";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Line } from "./Line";
 import styles from "./Tree.module.scss";
@@ -32,7 +32,10 @@ function TreeNode({
     "--color": badgeColors[node.badge],
     "--text-color": textColors[node.badge],
   } as React.CSSProperties;
-  const maxScore = node.node.tasks.length * TASK_MAX_SCORE;
+  const maxScore = node.node.tasks.reduce(
+    (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+    0
+  );
   return (
     <div className={styles.node} style={style}>
       <button
