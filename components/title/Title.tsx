@@ -3,7 +3,8 @@ import { Badge } from "lib/badges";
 import styles from "./Title.module.scss";
 
 export function Title({ badge }: { badge: Badge }) {
-  const hasGold = badge === "gold";
+  const hasDiamond = badge === "diamond";
+  const hasGold = hasDiamond || badge === "gold";
   const hasSilver = hasGold || badge === "silver";
   const hasBronze = hasSilver || badge === "bronze";
 
@@ -25,7 +26,9 @@ export function Title({ badge }: { badge: Badge }) {
       >
         B
       </span>
-      ADGE
+      A
+      <span className={classNames({ [styles.hasDiamond]: hasDiamond })}>D</span>
+      GE
     </span>
   );
 }

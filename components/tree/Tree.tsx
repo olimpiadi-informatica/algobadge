@@ -9,6 +9,7 @@ const badgeColors = {
   bronze: "#cd7f32",
   silver: "#c0c0c0",
   gold: "#ffdf00",
+  diamond: "#94ebff",
 };
 
 const textColors = {
@@ -17,6 +18,7 @@ const textColors = {
   bronze: "#523214",
   silver: "#4c4c4c",
   gold: "#665900",
+  diamond: "#000",
 };
 
 function TreeNode({

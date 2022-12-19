@@ -2,16 +2,24 @@ import { Node, TaskGraph } from "./taskgraph";
 import { UserInfo } from "./training-api";
 
 export const DEFAULT_MAX_SCORE = 100;
-export const UNLOCK_SCORE = 50 / 200;
-export const BRONZE_SCORE = 100 / 200;
-export const SILVER_SCORE = 150 / 200;
-export const GOLD_SCORE = 200 / 200;
+export const UNLOCK_SCORE = 50 / 250;
+export const BRONZE_SCORE = 100 / 250;
+export const SILVER_SCORE = 150 / 250;
+export const GOLD_SCORE = 200 / 250;
+export const DIAMOND_SCORE = 250 / 250;
 
 export const BRONZE_COLOR = "#cd7f32";
 export const SILVER_COLOR = "#c0c0c0";
 export const GOLD_COLOR = "#ffdf00";
+export const DIAMOND_COLOR = "#94ebff";
 
-export type Badge = "locked" | "none" | "bronze" | "silver" | "gold";
+export type Badge =
+  | "locked"
+  | "none"
+  | "bronze"
+  | "silver"
+  | "gold"
+  | "diamond";
 
 export type TaskScores = { [taskId: string]: number };
 export type TaskURLs = { [taskId: string]: string };
@@ -38,6 +46,8 @@ function badgeValue(badge: Badge): number {
       return 3;
     case "gold":
       return 4;
+    case "diamond":
+      return 5;
   }
 }
 
@@ -53,10 +63,13 @@ export function badgeColor(badge: Badge): string | null {
       return SILVER_COLOR;
     case "gold":
       return GOLD_COLOR;
+    case "diamond":
+      return DIAMOND_COLOR;
   }
 }
 
 function computeBadge(score: number, maxScore: number): Badge {
+  if (score >= maxScore * DIAMOND_SCORE) return "diamond";
   if (score >= maxScore * GOLD_SCORE) return "gold";
   if (score >= maxScore * SILVER_SCORE) return "silver";
   if (score >= maxScore * BRONZE_SCORE) return "bronze";
@@ -131,7 +144,7 @@ export function computeCategoryBadges(
 
 export function getTotalBadge(categoryBadges: CategoryBadges): Badge {
   const badges = Object.values(categoryBadges).map((badge) => badge.badge);
-  let lowest: Badge = "gold";
+  let lowest: Badge = "diamond";
   for (const badge of badges) {
     if (badgeValue(badge) < badgeValue(lowest)) {
       lowest = badge;

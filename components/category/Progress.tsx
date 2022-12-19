@@ -6,6 +6,8 @@ import {
   GOLD_SCORE,
   SILVER_COLOR,
   SILVER_SCORE,
+  DIAMOND_SCORE,
+  DIAMOND_COLOR,
   UNLOCK_SCORE,
 } from "lib/badges";
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
@@ -59,6 +61,7 @@ function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
     { position: BRONZE_SCORE, color: BRONZE_COLOR },
     { position: SILVER_SCORE, color: SILVER_COLOR },
     { position: GOLD_SCORE, color: GOLD_COLOR },
+    { position: DIAMOND_SCORE, color: DIAMOND_COLOR },
   ];
   return (
     <>
@@ -104,7 +107,7 @@ export function Progress({
     return (
       <div className={styles.progress}>
         <ProgressBar>
-          <ProgressBar className={styles.progressGold} animated now={100} />
+          <ProgressBar className={styles.progressDiamond} animated now={100} />
           <ProgressCheckpoints withUnlock={nextCategories.length > 0} />
         </ProgressBar>
       </div>
@@ -112,6 +115,11 @@ export function Progress({
   }
   const pieces = [];
   const cutoffs = [
+    {
+      from: GOLD_SCORE,
+      to: DIAMOND_SCORE,
+      className: styles.progressGold,
+    },
     {
       from: SILVER_SCORE,
       to: GOLD_SCORE,
@@ -161,6 +169,10 @@ export function Progress({
       message = `Ancora ${
         maxScore * GOLD_SCORE - score
       } punti per sbloccare il badge d'oro!`;
+    } else if (scorePerc < DIAMOND_SCORE) {
+      message = `Ancora ${
+        maxScore * DIAMOND_SCORE - score
+      } punti per sbloccare il badge di diamante!`;
     } else {
       return null;
     }
