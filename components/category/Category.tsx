@@ -11,12 +11,12 @@ import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
 
-function TaskList({ tasks , task_urls }: { tasks: TaskScores, task_urls: TaskURLs }) {
+function TaskList({ tasks , taskURLs }: { tasks: TaskScores, taskURLs: TaskURLs }) {
   const Task = ({ task, score, url }: { task: string; score: number, url: string }) => {
     return (
       <li>
         <a
-          href={`${url}`}
+          href={url}
           rel="noreferrer"
           target="_blank"
         >
@@ -30,7 +30,7 @@ function TaskList({ tasks , task_urls }: { tasks: TaskScores, task_urls: TaskURL
   return (
     <ul>
       {Object.entries(tasks).map(([task, score]) => (
-        <Task task={task} score={score} url={task_urls[task]} key={task} />
+        <Task task={task} score={score} url={taskURLs[task]} key={task} />
       ))}
     </ul>
   );
@@ -62,7 +62,7 @@ export function Category({
             nextCategories={nextCategories}
           />
           <div className={styles.taskList}>
-            <TaskList tasks={badge.tasks} task_urls={badge.task_urls} />
+            <TaskList tasks={badge.tasks} taskURLs={badge.taskURLs} />
           </div>
           <div className={styles.resources}>
             <ReactMarkdown

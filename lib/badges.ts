@@ -21,7 +21,7 @@ export type CategoryBadge = {
   score: number;
   badge: Badge;
   tasks: TaskScores;
-  task_urls: TaskURLs;
+  taskURLs: TaskURLs;
 };
 
 export type CategoryBadges = { [category: string]: CategoryBadge };
@@ -79,9 +79,10 @@ export function computeCategoryBadges(
     for (const task of node.tasks) {
       const taskScore = taskScores[task.name] ?? 0;
       categoryTasks[task.name] = taskScore;
-      categoryTaskURLs[task.name] = 'https://training.olinfo.it/#/task/' + task.name + '/statement';
       if (task.terry) {
         categoryTaskURLs[task.name] = 'https://territoriali.olinfo.it/task/' + task.name;
+      } else {
+        categoryTaskURLs[task.name] = 'https://training.olinfo.it/#/task/' + task.name + '/statement';
       }
       score += taskScore;
     }
@@ -90,7 +91,7 @@ export function computeCategoryBadges(
       score,
       badge: computeBadge(score, node.tasks.length),
       tasks: categoryTasks,
-      task_urls: categoryTaskURLs,
+      taskURLs: categoryTaskURLs,
     };
   }
 
