@@ -35,7 +35,7 @@ export async function getUserInfo(username: string): Promise<UserInfo | null> {
     if (reqTerr.status != 200) return data;
     const terrData = await reqTerr.json();
     for (const terrTask of terrData) {
-      terrTask['score'] = terrTask['score'] * 100 / terrTask['max_score'];
+      terrTask['score'] = terrTask['score'] * 50 / terrTask['max_score'];
       data.scores.push(terrTask);
     }
     return data;
