@@ -11,15 +11,25 @@ import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
 
-function TaskList({ tasks , taskURLs }: { tasks: TaskScores, taskURLs: TaskURLs }) {
-  const Task = ({ task, score, url }: { task: string; score: number, url: string }) => {
+function TaskList({
+  tasks,
+  taskURLs,
+}: {
+  tasks: TaskScores;
+  taskURLs: TaskURLs;
+}) {
+  const Task = ({
+    task,
+    score,
+    url,
+  }: {
+    task: string;
+    score: number;
+    url: string;
+  }) => {
     return (
       <li>
-        <a
-          href={url}
-          rel="noreferrer"
-          target="_blank"
-        >
+        <a href={url} rel="noreferrer" target="_blank">
           {task}
         </a>{" "}
         ({score} / {TASK_MAX_SCORE})

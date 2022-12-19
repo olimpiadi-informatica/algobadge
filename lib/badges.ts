@@ -79,11 +79,13 @@ export function computeCategoryBadges(
     for (const task of node.tasks) {
       const taskScore = taskScores[task.name] ?? 0;
       categoryTasks[task.name] = taskScore;
+      let url;
       if (task.terry) {
-        categoryTaskURLs[task.name] = 'https://territoriali.olinfo.it/task/' + task.name;
+        url = `https://territoriali.olinfo.it/task/${task.name}`;
       } else {
-        categoryTaskURLs[task.name] = 'https://training.olinfo.it/#/task/' + task.name + '/statement';
+        url = `https://training.olinfo.it/#/task/${task.name}/statement`;
       }
+      categoryTaskURLs[task.name] = url;
       score += taskScore;
     }
     categoryBadges[node.id] = {
