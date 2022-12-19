@@ -12,6 +12,7 @@ import {
 } from "lib/badges";
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 import { OverlayInjectedProps } from "react-bootstrap/esm/Overlay";
+import { round } from "lib/round";
 
 export function MedalIcon({
   color,
@@ -154,25 +155,30 @@ export function Progress({
   function Overlay(props: OverlayInjectedProps) {
     let message = "";
     if (scorePerc < UNLOCK_SCORE && nextCategories.length > 0) {
-      message = `Ancora ${
-        maxScore * UNLOCK_SCORE - score
-      } punti per sbloccare le prossime categorie`;
+      message = `Ancora ${round(
+        maxScore * UNLOCK_SCORE - score,
+        1
+      )} punti per sbloccare le prossime categorie`;
     } else if (scorePerc < BRONZE_SCORE) {
-      message = `Ancora ${
-        maxScore * BRONZE_SCORE - score
-      } punti per sbloccare il badge di bronzo!`;
+      message = `Ancora ${round(
+        maxScore * BRONZE_SCORE - score,
+        1
+      )} punti per sbloccare il badge di bronzo!`;
     } else if (scorePerc < SILVER_SCORE) {
-      message = `Ancora ${
-        maxScore * SILVER_SCORE - score
-      } punti per sbloccare il badge di argento!`;
+      message = `Ancora ${round(
+        maxScore * SILVER_SCORE - score,
+        1
+      )} punti per sbloccare il badge di argento!`;
     } else if (scorePerc < GOLD_SCORE) {
-      message = `Ancora ${
-        maxScore * GOLD_SCORE - score
-      } punti per sbloccare il badge d'oro!`;
+      message = `Ancora ${round(
+        maxScore * GOLD_SCORE - score,
+        1
+      )} punti per sbloccare il badge d'oro!`;
     } else if (scorePerc < DIAMOND_SCORE) {
-      message = `Ancora ${
-        maxScore * DIAMOND_SCORE - score
-      } punti per sbloccare il badge di diamante!`;
+      message = `Ancora ${round(
+        maxScore * DIAMOND_SCORE - score,
+        1
+      )} punti per sbloccare il badge di diamante!`;
     } else {
       return null;
     }

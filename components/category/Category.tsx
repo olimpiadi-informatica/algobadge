@@ -9,6 +9,7 @@ import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
 import { Task } from "lib/taskgraph";
+import { round } from "lib/round";
 
 function TaskList({ category }: { category: CategoryBadge }) {
   const Task = ({
@@ -25,7 +26,7 @@ function TaskList({ category }: { category: CategoryBadge }) {
         <a href={url} rel="noreferrer" target="_blank">
           {task.name}
         </a>{" "}
-        ({score} / {task.maxScore ?? DEFAULT_MAX_SCORE})
+        ({round(score, 1)} / {task.maxScore ?? DEFAULT_MAX_SCORE})
       </li>
     );
   };

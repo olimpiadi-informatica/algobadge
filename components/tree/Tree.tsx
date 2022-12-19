@@ -1,4 +1,5 @@
 import { CategoryBadge, CategoryBadges, DEFAULT_MAX_SCORE } from "lib/badges";
+import { round } from "lib/round";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Line } from "./Line";
 import styles from "./Tree.module.scss";
@@ -47,7 +48,7 @@ function TreeNode({
       >
         <div className={styles.badgeName}>{node.node.id}</div>
         <div className={styles.score}>
-          {node.score} / {maxScore}
+          {round(node.score, 1)} / {maxScore}
         </div>
       </button>
     </div>
