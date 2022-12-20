@@ -5,6 +5,9 @@ prerequisites:
 - rec
 position: [3, 3]
 tasks:
+- name: mostra
+  terry: true
+  maxScore: 50
 - name: preoii_treni
 - name: ois_nonna
 ---

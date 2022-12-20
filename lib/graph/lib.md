@@ -5,8 +5,11 @@ prerequisites:
 - intro
 position: [2, 1]
 tasks:
-- name: catalogo
 - name: cestini
+  terry: true
+  maxScore: 50
+- name: catalogo
+- name: autogrill
 ---
 In questo argomento, dovrai familiarizzare con il linguaggio C++ e con quello che offrono le sue librerie standard. Se ancora non sei familiare con il linguaggio C in generale, ti consigliamo di iniziare da questo corso introduttivo.
 

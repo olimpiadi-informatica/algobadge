@@ -5,8 +5,11 @@ prerequisites:
 - lib
 position: [3, 2]
 tasks:
+- name: interruttori
+  terry: true
+  maxScore: 50
 - name: ois_islands
-- name: mincammino
+- name: ois_police5
 ---
 In questo argomento si affrontano problemi su grafi, costituiti da nodi collegati a coppie da archi, tramite visite e calcolo di cammini minimi. Per una lezione più introduttiva all'argomento, puoi seguire la seguente lezione, integrata da una dispensa sul calcolo di cammini minimi.
 
