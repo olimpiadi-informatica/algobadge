@@ -61,7 +61,7 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
     setResults({});
     setUserInfo({});
     for (const username of usernameList) {
-      getUserInfo(username)
+      getUserInfo(username, taskGraph)
         .then((info) => {
           if (info) setUserInfo((old) => ({ ...old, [info.username]: info }));
           return info ? computeCategoryBadges(taskGraph, info, false) : null;

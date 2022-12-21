@@ -25,8 +25,8 @@ export default function Home({ taskGraph }: { taskGraph: TaskGraph }) {
       setUserInfo(null);
     }
     if (!user) return;
-    getUserInfo(user.username).then((info) => setUserInfo(info));
-  }, [user]);
+    getUserInfo(user.username, taskGraph).then((info) => setUserInfo(info));
+  }, [user, taskGraph]);
 
   if (user === undefined || userInfo === undefined) return <Loading />;
   if (user === null || userInfo === null) return <Login />;
