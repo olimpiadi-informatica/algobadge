@@ -37,7 +37,7 @@ function TaskList({ category }: { category: CategoryBadge }) {
               </Tooltip>
             }
           >
-            <span>({scoreMessage}*)</span>
+            <span>{scoreMessage}*</span>
           </OverlayTrigger>
         ) : (
           scoreMessage
