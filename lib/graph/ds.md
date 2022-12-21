@@ -5,7 +5,10 @@ prerequisites:
 - grafi
 position: [4, 2]
 tasks:
-- name: segtree
+- name: calcio
+  terry: true
+  maxScore: 50
+- name: muraglia
 - name: oii_paletta
 ---
 Questo argomento è dedicato alla programmazione di strutture dati, che memorizzano informazioni in modo da essere gestite efficientemente. Se preferisci del materiale scritto, puoi leggere questa dispensa sulle strutture dati per query su array.

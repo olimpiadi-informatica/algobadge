@@ -1,4 +1,5 @@
-import { CategoryBadge, CategoryBadges, TASK_MAX_SCORE } from "lib/badges";
+import { CategoryBadge, CategoryBadges, DEFAULT_MAX_SCORE } from "lib/badges";
+import { round } from "lib/round";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Line } from "./Line";
 import styles from "./Tree.module.scss";
@@ -9,6 +10,7 @@ const badgeColors = {
   bronze: "#cd7f32",
   silver: "#c0c0c0",
   gold: "#ffdf00",
+  diamond: "#94ebff",
 };
 
 const textColors = {
@@ -17,6 +19,7 @@ const textColors = {
   bronze: "#523214",
   silver: "#4c4c4c",
   gold: "#665900",
+  diamond: "#000",
 };
 
 function TreeNode({
@@ -32,7 +35,10 @@ function TreeNode({
     "--color": badgeColors[node.badge],
     "--text-color": textColors[node.badge],
   } as React.CSSProperties;
-  const maxScore = node.node.tasks.length * TASK_MAX_SCORE;
+  const maxScore = node.node.tasks.reduce(
+    (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+    0
+  );
   return (
     <div className={styles.node} style={style}>
       <button
@@ -42,7 +48,7 @@ function TreeNode({
       >
         <div className={styles.badgeName}>{node.node.id}</div>
         <div className={styles.score}>
-          {node.score} / {maxScore}
+          {round(node.score, 1)} / {maxScore}
         </div>
       </button>
     </div>

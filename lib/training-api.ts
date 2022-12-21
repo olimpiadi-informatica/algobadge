@@ -24,9 +24,20 @@ export async function getUserInfo(username: string): Promise<UserInfo | null> {
       body: JSON.stringify(body),
       credentials: "include",
     });
+    // If there is no training account, there is also no territoriali account.
     if (req.status !== 200) return null;
     const data = await req.json();
     if (data.success !== 1) return null;
+    const reqTerr = await fetch(`https://territoriali.olinfo.it/api/user/${username}/scores`, {
+      method: "GET",
+    });
+    // Only send use data from training if there is no account on territoriali.
+    if (reqTerr.status != 200) return data;
+    const terrData = await reqTerr.json();
+    for (const terrTask of terrData) {
+      terrTask['score'] = terrTask['score'] * 50 / terrTask['max_score'];
+      data.scores.push(terrTask);
+    }
     return data;
   } catch {
     return null;

@@ -6,11 +6,13 @@ import {
   GOLD_SCORE,
   SILVER_COLOR,
   SILVER_SCORE,
-  TASK_MAX_SCORE,
+  DIAMOND_SCORE,
+  DIAMOND_COLOR,
   UNLOCK_SCORE,
 } from "lib/badges";
 import { OverlayTrigger, ProgressBar, Tooltip } from "react-bootstrap";
 import { OverlayInjectedProps } from "react-bootstrap/esm/Overlay";
+import { round } from "lib/round";
 
 export function MedalIcon({
   color,
@@ -60,6 +62,7 @@ function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
     { position: BRONZE_SCORE, color: BRONZE_COLOR },
     { position: SILVER_SCORE, color: SILVER_COLOR },
     { position: GOLD_SCORE, color: GOLD_COLOR },
+    { position: DIAMOND_SCORE, color: DIAMOND_COLOR },
   ];
   return (
     <>
@@ -94,18 +97,18 @@ function ProgressCheckpoints({ withUnlock }: { withUnlock: boolean }) {
 
 export function Progress({
   score,
-  numTasks,
+  maxScore,
   nextCategories,
 }: {
   score: number;
-  numTasks: number;
+  maxScore: number;
   nextCategories: string[];
 }) {
-  if (score === numTasks * TASK_MAX_SCORE) {
+  if (score === maxScore) {
     return (
       <div className={styles.progress}>
         <ProgressBar>
-          <ProgressBar className={styles.progressGold} animated now={100} />
+          <ProgressBar className={styles.progressDiamond} animated now={100} />
           <ProgressCheckpoints withUnlock={nextCategories.length > 0} />
         </ProgressBar>
       </div>
@@ -113,6 +116,11 @@ export function Progress({
   }
   const pieces = [];
   const cutoffs = [
+    {
+      from: GOLD_SCORE,
+      to: DIAMOND_SCORE,
+      className: styles.progressGold,
+    },
     {
       from: SILVER_SCORE,
       to: GOLD_SCORE,
@@ -129,7 +137,7 @@ export function Progress({
       className: styles.progressNone,
     },
   ];
-  const scorePerc = score / numTasks / TASK_MAX_SCORE;
+  const scorePerc = score / maxScore;
   for (const cutoff of cutoffs) {
     if (scorePerc >= cutoff.from) {
       pieces.push(
@@ -147,21 +155,30 @@ export function Progress({
   function Overlay(props: OverlayInjectedProps) {
     let message = "";
     if (scorePerc < UNLOCK_SCORE && nextCategories.length > 0) {
-      message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * UNLOCK_SCORE - score
-      } punti per sbloccare le prossime categorie`;
+      message = `Ancora ${round(
+        maxScore * UNLOCK_SCORE - score,
+        1
+      )} punti per sbloccare le prossime categorie`;
     } else if (scorePerc < BRONZE_SCORE) {
-      message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * BRONZE_SCORE - score
-      } punti per sbloccare il badge di bronzo!`;
+      message = `Ancora ${round(
+        maxScore * BRONZE_SCORE - score,
+        1
+      )} punti per sbloccare il badge di bronzo!`;
     } else if (scorePerc < SILVER_SCORE) {
-      message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * SILVER_SCORE - score
-      } punti per sbloccare il badge di argento!`;
+      message = `Ancora ${round(
+        maxScore * SILVER_SCORE - score,
+        1
+      )} punti per sbloccare il badge di argento!`;
     } else if (scorePerc < GOLD_SCORE) {
-      message = `Ancora ${
-        numTasks * TASK_MAX_SCORE * GOLD_SCORE - score
-      } punti per sbloccare il badge d'oro!`;
+      message = `Ancora ${round(
+        maxScore * GOLD_SCORE - score,
+        1
+      )} punti per sbloccare il badge d'oro!`;
+    } else if (scorePerc < DIAMOND_SCORE) {
+      message = `Ancora ${round(
+        maxScore * DIAMOND_SCORE - score,
+        1
+      )} punti per sbloccare il badge di diamante!`;
     } else {
       return null;
     }

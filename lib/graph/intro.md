@@ -4,6 +4,9 @@ id: intro
 prerequisites: []
 position: [1, 2]
 tasks:
+- name: download
+  terry: true
+  maxScore: 50
 - name: ois_biglietti
 - name: massimo
 ---

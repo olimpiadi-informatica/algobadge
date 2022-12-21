@@ -11,13 +11,19 @@ import { useState } from "react";
 import { Button, FormControl, Table } from "react-bootstrap";
 import styles from "./Bulk.module.scss";
 
-type Sum = { gold: number; silver: number; bronze: number; none: number };
+type Sum = {
+  diamond: number;
+  gold: number;
+  silver: number;
+  bronze: number;
+  none: number;
+};
 
 function MedalSummary({ sum, numStudents }: { sum: Sum; numStudents: number }) {
   const missing = numStudents - Object.values(sum).reduce((s, a) => s + a, 0);
   return (
     <>
-      {(["gold", "silver", "bronze"] as const).map((medal) => (
+      {(["diamond", "gold", "silver", "bronze"] as const).map((medal) => (
         <div key={medal} className={styles.medalSummary}>
           <MedalIcon color={badgeColor(medal)} size={20} />
           &nbsp;
@@ -69,15 +75,16 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
   };
 
   const badgeSum: Record<string, Sum> = {};
-  const totalSum: Sum = { gold: 0, silver: 0, bronze: 0, none: 0 };
+  const totalSum: Sum = { diamond: 0, gold: 0, silver: 0, bronze: 0, none: 0 };
   let oneOff = 0;
   for (const badges of Object.values(results)) {
     let missingBadges = 0;
     for (const [cat, badge] of Object.entries(badges)) {
       if (!(cat in badgeSum)) {
-        badgeSum[cat] = { gold: 0, silver: 0, bronze: 0, none: 0 };
+        badgeSum[cat] = { diamond: 0, gold: 0, silver: 0, bronze: 0, none: 0 };
       }
       if (
+        badge.badge === "diamond" ||
         badge.badge === "gold" ||
         badge.badge === "silver" ||
         badge.badge === "bronze"
@@ -90,6 +97,7 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
     }
     const totalBadge = getTotalBadge(badges);
     if (
+      totalBadge === "diamond" ||
       totalBadge === "gold" ||
       totalBadge === "silver" ||
       totalBadge === "bronze"
@@ -189,14 +197,21 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
                     &ge;
                     <MedalIcon color={badgeColor("bronze")} size={20} />{" "}
                   </abbr>
-                  {totalSum.gold + totalSum.silver + totalSum.bronze}
+                  {totalSum.diamond +
+                    totalSum.gold +
+                    totalSum.silver +
+                    totalSum.bronze}
                 </div>
                 <div className={styles.medalSummary}>
                   <abbr title="At most one badge from bronze">
                     ~
                     <MedalIcon color={badgeColor("bronze")} size={20} />{" "}
                   </abbr>
-                  {totalSum.gold + totalSum.silver + totalSum.bronze + oneOff}
+                  {totalSum.diamond +
+                    totalSum.gold +
+                    totalSum.silver +
+                    totalSum.bronze +
+                    oneOff}
                 </div>
               </td>
               {taskGraph.nodes.map((node) => (

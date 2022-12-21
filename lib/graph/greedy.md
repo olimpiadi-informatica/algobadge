@@ -5,6 +5,9 @@ prerequisites:
 - lib
 position: [3, 1]
 tasks:
+- name: collezionismo
+  terry: true
+  maxScore: 50
 - name: abc_quadri
 - name: ois_truffa
 ---

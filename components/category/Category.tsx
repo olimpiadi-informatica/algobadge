@@ -1,35 +1,60 @@
 import {
   CategoryBadge,
   CategoryBadges,
-  TaskScores,
-  TASK_MAX_SCORE,
+  DEFAULT_MAX_SCORE,
   UNLOCK_SCORE,
 } from "lib/badges";
 import styles from "./Category.module.scss";
 import ReactMarkdown from "react-markdown";
 import React from "react";
 import { Progress } from "./Progress";
+import { Task } from "lib/taskgraph";
+import { round } from "lib/round";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-function TaskList({ tasks }: { tasks: TaskScores }) {
-  const Task = ({ task, score }: { task: string; score: number }) => {
+function TaskList({ category }: { category: CategoryBadge }) {
+  const Task = ({
+    task,
+    score,
+    url,
+  }: {
+    task: Task;
+    score: number;
+    url: string;
+  }) => {
+    const maxScore = task.maxScore ?? DEFAULT_MAX_SCORE;
+    const scoreMessage = `${round(score, 1)} / ${maxScore}`;
     return (
       <li>
-        <a
-          href={`https://training.olinfo.it/#/task/${task}/statement`}
-          rel="noreferrer"
-          target="_blank"
-        >
-          {task}
+        <a href={url} rel="noreferrer" target="_blank">
+          {task.name}
         </a>{" "}
-        ({score} / {TASK_MAX_SCORE})
+        {task.terry ? (
+          <OverlayTrigger
+            overlay={
+              <Tooltip>
+                Punteggio del problema scalato su {maxScore} punti.
+              </Tooltip>
+            }
+          >
+            <span>({scoreMessage}*)</span>
+          </OverlayTrigger>
+        ) : (
+          scoreMessage
+        )}
       </li>
     );
   };
 
   return (
     <ul>
-      {Object.entries(tasks).map(([task, score]) => (
-        <Task task={task} score={score} key={task} />
+      {category.node.tasks.map((task) => (
+        <Task
+          task={task}
+          score={category.tasks[task.name]}
+          url={category.taskURLs[task.name]}
+          key={task.name}
+        />
       ))}
     </ul>
   );
@@ -42,10 +67,16 @@ export function Category({
   badge: CategoryBadge;
   badges: CategoryBadges;
 }) {
-  const unlockScore = badge.node.prerequisites.map(
-    (p) => Object.keys(badges[p].tasks).length * TASK_MAX_SCORE
+  const unlockScore = badge.node.prerequisites.map((p) =>
+    badges[p].node.tasks.reduce(
+      (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+      0
+    )
   );
-  const numTasks = badge.node.tasks.length;
+  const maxScore = badge.node.tasks.reduce(
+    (acc, task) => acc + (task.maxScore ?? DEFAULT_MAX_SCORE),
+    0
+  );
   const nextCategories = Object.values(badges)
     .filter((b) => b.node.prerequisites.includes(badge.node.id))
     .map((b) => b.node.id);
@@ -57,11 +88,11 @@ export function Category({
         <>
           <Progress
             score={badge.score}
-            numTasks={numTasks}
+            maxScore={maxScore}
             nextCategories={nextCategories}
           />
           <div className={styles.taskList}>
-            <TaskList tasks={badge.tasks} />
+            <TaskList category={badge} />
           </div>
           <div className={styles.resources}>
             <ReactMarkdown

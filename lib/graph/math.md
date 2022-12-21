@@ -5,6 +5,9 @@ prerequisites:
 - intro
 position: [2, 2]
 tasks:
+- name: caramelle
+  terry: true
+  maxScore: 50
 - name: ois_scrigni
 - name: abc_rsa
 ---
