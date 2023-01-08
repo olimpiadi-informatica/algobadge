@@ -9,10 +9,10 @@ export type LoggedUser = {
 
 function getParsedCookie(): LoggedUser | null {
   const cookies = cookie.parse(window.document.cookie);
-  if (!cookies.token) {
+  const token = cookies.training_token;
+  if (!token) {
     return null;
   }
-  const token = cookies.token;
   const [_key, userData, _signature] = token.split(".");
   try {
     const base64 = userData.replace(/-/g, "+").replace(/_/g, "/");
