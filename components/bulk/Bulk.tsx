@@ -125,6 +125,7 @@ export function Bulk({ taskGraph }: { taskGraph: TaskGraph }) {
         onChange={(e) => setUsernames(e.target.value)}
         value={usernames}
         className={styles.usernames}
+        autoFocus={true}
       />
       <Button onClick={() => load()}>Via!</Button>
       <hr />
