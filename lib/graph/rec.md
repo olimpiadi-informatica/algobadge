@@ -1,5 +1,5 @@
 ---
-title: Ricorsione e backtracking
+title: Induzione e ricorsione
 id: rec
 prerequisites:
 - intro
@@ -8,21 +8,16 @@ tasks:
 - name: antivirus
   terry: true
   maxScore: 50
-- name: ois_cabala
-- name: solitario2
+- name: ctf
+- name: shiftmul
 ---
-I problemi di questo argomento richiedono di esplorare lo spazio delle possibili soluzioni per tentativi ed errori, tramite ricorsione ottimizzata da euristiche e bounds. Se non sei familiare con la ricorsione, puoi seguire questa lezione sull'argomento.
+
+I problemi di questo argomento richiedono di ragionare in modo induttivo, cercando di derivare la soluzione al problema a partire da istanza più piccole dello stesso.
+Sebbene non sempre richiesta, in questi casi può aiutare pensare a una soluzione ricorsiva, che è poi solo un modo diverso di vedere l'induzione.
+
+Se non sei familiare con induzione e ricorsione, puoi seguire questa lezione sull'argomento — che tratta anche di esponenziazione veloce, una tecnica comune per calcolare potenze in modo efficiente.
+
 ## Videolezione di Giorgio Audrito (Stage PO 2021)
 
 - [Induzione, ricorsione, esponenziazione veloce (slides)](https://wiki.olinfo.it/2021/ricorsione_fastexp.pdf)
-- [Videolezione (solo seconda parte)](https://youtu.be/8sr5Of-Bb1s)
-
-Per approfondire tecniche di ottimizzazione per algoritmi ricorsivi, puoi invece seguire la seconda parte della lezione seguente (più completa), oppure la dispensa dedicata (su un argomento più specifico).
-
-## Videolezione di Marco Donadoni (Stage PO 2021)
-- [Slides (solo seconda parte)](https://wiki.olinfo.it/2021/greedy_backtracking.pdf)
-- [Videolezione (solo seconda parte)](https://youtu.be/Hrp7_O2LOh8)
-
-## Dispense UniMI
-
-- [La strategia MiniMax](https://wiki.olinfo.it/extra/unimi/minimax.pdf)
+- [Videolezione](https://youtu.be/8sr5Of-Bb1s)
